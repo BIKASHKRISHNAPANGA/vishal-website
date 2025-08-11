@@ -4,13 +4,14 @@ import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, Trophy, Users, Calendar, Award, Phone, Sun, Moon } from "lucide-react"
+import { Menu, Trophy, Users, Calendar, Award, Phone, Sun, Moon, BookOpen } from "lucide-react"
 import { useTheme } from "next-themes"
 
 const navigationItems = [
   { name: "Home", href: "/", icon: Trophy },
   { name: "Schools", href: "/schools", icon: Users },
   { name: "Events", href: "/events", icon: Calendar },
+  { name: "Books", href: "/books", icon: BookOpen }, // Added Books navigation item
   { name: "Leaderboard", href: "/leaderboard", icon: Award },
   { name: "Contact", href: "/contact", icon: Phone },
 ]

@@ -26,7 +26,7 @@ const navigationItems = [
   { name: "Contact", href: "/contact", icon: Phone },
 ];
 
-function Navigation() {
+export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -170,4 +170,4 @@ function Navigation() {
   );
 }
 
-export default Navigation;
+

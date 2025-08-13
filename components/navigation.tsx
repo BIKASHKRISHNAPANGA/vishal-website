@@ -1,114 +1,173 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, Trophy, Users, Calendar, Award, Phone, Sun, Moon, BookOpen } from "lucide-react"
-import { useTheme } from "next-themes"
+import Link from "next/link";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useState } from "react";
+import {
+  Trophy,
+  Users,
+  Calendar,
+  Award,
+  Phone,
+  Sun,
+  Moon,
+  BookOpen,
+  MenuIcon,
+  XIcon,
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const navigationItems = [
   { name: "Home", href: "/", icon: Trophy },
   { name: "Schools", href: "/schools", icon: Users },
   { name: "Events", href: "/events", icon: Calendar },
-  { name: "Books", href: "/books", icon: BookOpen }, // Added Books navigation item
+  { name: "Books", href: "/books", icon: BookOpen },
   { name: "Leaderboard", href: "/leaderboard", icon: Award },
   { name: "Contact", href: "/contact", icon: Phone },
-]
+];
 
-export function Navigation() {
-  const [isOpen, setIsOpen] = useState(false)
-  const { theme, setTheme } = useTheme()
+function Navigation() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
+    <>
+      <header className="bg-white backdrop-blur-lg relative">
+        <div className="mx-auto flex items-center justify-between py-4 max-sm:px-6 px-10">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <Trophy className="h-8 w-8 text-[var(--color-royal-blue)]" />
-            <span className="font-serif text-xl font-bold text-[var(--color-royal-blue)]">School of the Year</span>
-          </Link>
+          <div className="flex items-center space-x-16">
+            <Link href="/" className="flex items-center space-x-2">
+              <Trophy className="h-8 w-8 text-blue-600" />
+              <span className="font-serif text-xl font-bold text-blue-600">
+                School of the Year
+              </span>
+            </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
-            {navigationItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-sm font-medium transition-colors hover:text-[var(--color-royal-blue)] flex items-center space-x-1"
-              >
-                <item.icon className="h-4 w-4" />
-                <span>{item.name}</span>
-              </Link>
-            ))}
+            {/* Desktop Nav */}
+            <nav className="hidden lg:flex items-center gap-12">
+              {navigationItems.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="text-black/90 hover:text-black text-base transition flex items-center space-x-1"
+                >
+                  <item.icon className="h-4 w-4" />
+                  <span>{item.name}</span>
+                </Link>
+              ))}
+            </nav>
+          </div>
 
+          {/* Right Controls */}
+          <div className="hidden lg:flex items-center gap-4">
             {/* Theme Toggle */}
-            <Button variant="ghost" size="sm" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              <span className="sr-only">Toggle theme</span>
-            </Button>
+            <button
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              className="border-black flex items-center py-2 px-3 text-base rounded text-black border transition-all"
+            >
+              {isDarkMode ? (
+                <Sun className="h-4 w-4" />
+              ) : (
+                <Moon className="h-4 w-4" />
+              )}
+            </button>
 
             {/* CTA Buttons */}
-            <div className="flex items-center space-x-2">
-              <Button variant="outline" size="sm" asChild>
-                <Link href="/schools/register">Register School</Link>
-              </Button>
-              <Button size="sm" className="bg-[var(--color-royal-blue)] hover:bg-[var(--color-royal-blue)]/90" asChild>
-                <Link href="/students/register">Register Student</Link>
-              </Button>
-            </div>
+            <Link
+              href="/schools/register"
+              className="border-black flex items-center py-2 px-5 text-base rounded text-black border transition-all"
+            >
+              Register School
+            </Link>
+            <Link
+              href="/students/register"
+              className="bg-black text-white px-5 py-2 text-base rounded-md hover:bg-gray-900 transition"
+            >
+              Register Student
+            </Link>
           </div>
 
-          {/* Mobile Navigation */}
-          <div className="md:hidden flex items-center space-x-2">
-            <Button variant="ghost" size="sm" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            </Button>
-
-            <Sheet open={isOpen} onOpenChange={setIsOpen}>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="sm">
-                  <Menu className="h-5 w-5" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-                <div className="flex flex-col space-y-4 mt-8">
-                  {navigationItems.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className="flex items-center space-x-3 text-lg font-medium transition-colors hover:text-[var(--color-royal-blue)]"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <item.icon className="h-5 w-5" />
-                      <span>{item.name}</span>
-                    </Link>
-                  ))}
-
-                  <div className="pt-4 border-t space-y-2">
-                    <Button variant="outline" className="w-full bg-transparent" asChild>
-                      <Link href="/schools/register" onClick={() => setIsOpen(false)}>
-                        Register School
-                      </Link>
-                    </Button>
-                    <Button
-                      className="w-full bg-[var(--color-royal-blue)] hover:bg-[var(--color-royal-blue)]/90"
-                      asChild
-                    >
-                      <Link href="/students/register" onClick={() => setIsOpen(false)}>
-                        Register Student
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
+          {/* Mobile toggle */}
+          <button
+            className="max-lg:flex hidden max-sm:hidden text-gray-700"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? (
+              <XIcon className="h-6 w-6" />
+            ) : (
+              <MenuIcon className="h-6 w-6" />
+            )}
+          </button>
         </div>
+
+        {/* Mobile Nav */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25 }}
+              className="lg:hidden bg-white shadow-md px-4 pb-4"
+            >
+              {navigationItems.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center space-x-3 py-2 text-gray-700 hover:text-black"
+                >
+                  <item.icon className="h-5 w-5" />
+                  <span>{item.name}</span>
+                </Link>
+              ))}
+              <div className="mt-4 border-t pt-4 space-y-2">
+                <Link
+                  href="/schools/register"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block text-sm py-2 px-4 border border-gray-300 rounded text-center"
+                >
+                  Register School
+                </Link>
+                <Link
+                  href="/students/register"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block text-sm font-medium py-2 px-4 bg-black text-white rounded text-center"
+                >
+                  Register Student
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
+
+      {/* Mobile Bottom Navigation */}
+      <div className="fixed bottom-0 left-0 z-50 w-full bg-white border-t border-gray-200 py-2 px-4 max-sm:flex justify-between items-center hidden">
+        {navigationItems.slice(0, 4).map((item) => (
+          <Link
+            key={item.name}
+            href={item.href}
+            className="flex flex-col items-center text-xs text-gray-600 hover:text-black"
+          >
+            <item.icon className="h-5 w-5 mb-0.5" />
+            {item.name}
+          </Link>
+        ))}
+        <button
+          onClick={() => setIsDarkMode(!isDarkMode)}
+          className="flex flex-col items-center text-xs text-gray-600 hover:text-black"
+        >
+          {isDarkMode ? (
+            <Sun className="h-5 w-5 mb-0.5" />
+          ) : (
+            <Moon className="h-5 w-5 mb-0.5" />
+          )}
+          Theme
+        </button>
       </div>
-    </nav>
-  )
+    </>
+  );
 }
+
+export default Navigation;

@@ -230,3 +230,8 @@ html {
   transform: translateY(-4px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
+html {
+  font-family: var(--font-inter);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
+}

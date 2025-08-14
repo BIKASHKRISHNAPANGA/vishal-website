@@ -76,21 +76,17 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <style>{`
-html {
-  font-family: ${inter.style.fontFamily};
-  --font-sans: ${inter.variable};
-  --font-serif: ${playfair.variable};
-}
-        `}</style>
-      </head>
-      <body className={`${inter.variable} ${playfair.variable} antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+      <body className="antialiased">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
           {children}
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import {
   Trophy,
@@ -12,162 +12,184 @@ import {
   Sun,
   Moon,
   BookOpen,
-  MenuIcon,
-  XIcon,
+  Menu,
+  X,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "next-themes";
 
 const navigationItems = [
-  { name: "Home", href: "/", icon: Trophy },
-  { name: "Schools", href: "/schools", icon: Users },
-  { name: "Events", href: "/events", icon: Calendar },
-  { name: "Books", href: "/books", icon: BookOpen },
-  { name: "Leaderboard", href: "/leaderboard", icon: Award },
-  { name: "Contact", href: "/contact", icon: Phone },
+  { name: "Home", href: "/" },
+  { name: "Schools", href: "/schools" },
+  { name: "Events", href: "/events" },
+  { name: "Books", href: "/books" },
+  { name: "Leaderboard", href: "/leaderboard" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   return (
-    <>
-      <header className="bg-white backdrop-blur-lg relative">
-        <div className="mx-auto flex items-center justify-between py-4 max-sm:px-6 px-10">
-          {/* Logo */}
-          <div className="flex items-center space-x-16">
-            <Link href="/" className="flex items-center space-x-2">
-              <Trophy className="h-8 w-8 text-blue-600" />
-              <span className="font-serif text-xl font-bold text-blue-600">
-                School of the Year
-              </span>
-            </Link>
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container mx-auto flex items-center justify-between py-4 px-6">
+        {/* Logo */}
+        <Link href="/" className="flex items-center space-x-2">
+          <Trophy className="h-8 w-8 text-[var(--color-royal-blue)]" />
+          <span className="font-serif text-xl font-bold text-[var(--color-royal-blue)]">
+            School of the Year
+          </span>
+        </Link>
 
-            {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-12">
-              {navigationItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="text-black/90 hover:text-black text-base transition flex items-center space-x-1"
-                >
-                  <item.icon className="h-4 w-4" />
-                  <span>{item.name}</span>
-                </Link>
-              ))}
-            </nav>
-          </div>
-
-          {/* Right Controls */}
-          <div className="hidden lg:flex items-center gap-4">
-            {/* Theme Toggle */}
-            <button
-              onClick={() => setIsDarkMode(!isDarkMode)}
-              className="border-black flex items-center py-2 px-3 text-base rounded text-black border transition-all"
-            >
-              {isDarkMode ? (
-                <Sun className="h-4 w-4" />
-              ) : (
-                <Moon className="h-4 w-4" />
-              )}
-            </button>
-
-            {/* CTA Buttons */}
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center gap-8">
+          {navigationItems.map((item) => (
             <Link
-              href="/schools/register"
-              className="border-black flex items-center py-2 px-5 text-base rounded text-black border transition-all"
+              key={item.name}
+              href={item.href}
+              className="text-foreground/80 hover:text-foreground text-sm font-medium transition-all duration-200 relative group"
             >
-              Register School
+              {item.name}
+              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[var(--color-royal-blue)] transition-all duration-200 group-hover:w-full" />
             </Link>
-            <Link
-              href="/students/register"
-              className="bg-black text-white px-5 py-2 text-base rounded-md hover:bg-gray-900 transition"
-            >
-              Register Student
-            </Link>
-          </div>
+          ))}
+        </nav>
 
-          {/* Mobile toggle */}
-          <button
-            className="max-lg:flex hidden max-sm:hidden text-gray-700"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        {/* Desktop Actions */}
+        <div className="hidden lg:flex items-center gap-3">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="p-2"
           >
-            {isMobileMenuOpen ? (
-              <XIcon className="h-6 w-6" />
-            ) : (
-              <MenuIcon className="h-6 w-6" />
-            )}
-          </button>
+            <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            <span className="sr-only">Toggle theme</span>
+          </Button>
+
+          <Button variant="outline" size="sm" asChild>
+            <Link href="/schools/register">Register School</Link>
+          </Button>
+
+          <Button
+            size="sm"
+            className="bg-[var(--color-royal-blue)] hover:bg-[var(--color-royal-blue)]/90 text-white"
+            asChild
+          >
+            <Link href="/students/register">Register Student</Link>
+          </Button>
         </div>
 
-        {/* Mobile Nav */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
+        {/* Tablet & Mobile Menu Button */}
+        <div className="lg:hidden flex items-center gap-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="p-2"
+          >
+            <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          </Button>
+
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2"
+          >
+            <Menu className="h-5 w-5" />
+          </Button>
+        </div>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            {/* Backdrop */}
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.25 }}
-              className="lg:hidden bg-white shadow-md px-4 pb-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+
+            {/* Menu Panel */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: -20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -20 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="fixed top-20 left-4 right-4 max-w-md mx-auto bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-2xl shadow-black/20 dark:shadow-black/40 z-50 lg:hidden"
             >
-              {navigationItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
+              {/* Header with Close Button */}
+              <div className="flex items-center justify-between p-4 border-b border-border/50">
+                <h3 className="font-semibold text-foreground">Menu</h3>
+                <Button
+                  variant="ghost"
+                  size="sm"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center space-x-3 py-2 text-gray-700 hover:text-black"
+                  className="p-1 h-8 w-8"
                 >
-                  <item.icon className="h-5 w-5" />
-                  <span>{item.name}</span>
-                </Link>
-              ))}
-              <div className="mt-4 border-t pt-4 space-y-2">
-                <Link
-                  href="/schools/register"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-sm py-2 px-4 border border-gray-300 rounded text-center"
-                >
-                  Register School
-                </Link>
-                <Link
-                  href="/students/register"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-sm font-medium py-2 px-4 bg-black text-white rounded text-center"
-                >
-                  Register Student
-                </Link>
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+
+              <div className="p-6">
+                <nav className="space-y-2">
+                  {navigationItems.map((item, index) => (
+                    <motion.div
+                      key={item.name}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.08, duration: 0.3 }}
+                    >
+                      <Link
+                        href={item.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="flex items-center py-3 px-4 rounded-xl text-foreground/80 hover:text-foreground hover:bg-[var(--color-royal-blue)]/10 font-medium transition-all duration-200 group"
+                      >
+                        <span className="relative">
+                          {item.name}
+                          <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[var(--color-royal-blue)] transition-all duration-200 group-hover:w-full" />
+                        </span>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </nav>
+
+                <div className="mt-6 pt-4 border-t border-border/50 space-y-3">
+                  <Button variant="outline" className="w-full" asChild>
+                    <Link
+                      href="/schools/register"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Register School
+                    </Link>
+                  </Button>
+
+                  <Button
+                    className="w-full bg-[var(--color-royal-blue)] hover:bg-[var(--color-royal-blue)]/90 text-white"
+                    asChild
+                  >
+                    <Link
+                      href="/students/register"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Register Student
+                    </Link>
+                  </Button>
+                </div>
               </div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </header>
-
-      {/* Mobile Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 z-50 w-full bg-white border-t border-gray-200 py-2 px-4 max-sm:flex justify-between items-center hidden">
-        {navigationItems.slice(0, 4).map((item) => (
-          <Link
-            key={item.name}
-            href={item.href}
-            className="flex flex-col items-center text-xs text-gray-600 hover:text-black"
-          >
-            <item.icon className="h-5 w-5 mb-0.5" />
-            {item.name}
-          </Link>
-        ))}
-        <button
-          onClick={() => setIsDarkMode(!isDarkMode)}
-          className="flex flex-col items-center text-xs text-gray-600 hover:text-black"
-        >
-          {isDarkMode ? (
-            <Sun className="h-5 w-5 mb-0.5" />
-          ) : (
-            <Moon className="h-5 w-5 mb-0.5" />
-          )}
-          Theme
-        </button>
-      </div>
-    </>
+          </>
+        )}
+      </AnimatePresence>
+    </header>
   );
 }
-
-

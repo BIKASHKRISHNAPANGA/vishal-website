@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Trophy, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube } from "lucide-react"
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -8,25 +9,49 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <Trophy className="h-8 w-8 text-[var(--color-gold)]" />
-              <span className="font-serif text-xl font-bold">School of the Year</span>
+            <div className="flex items-center space-x-3">
+              <Image
+                src="/logo.png"
+                alt="Brand Logo"
+                width={60}
+                height={20}
+                priority
+              />
+              <span className="font-serif text-lg md:text-xl font-bold text-white leading-snug">
+                Interschool Olympiad <br />
+                <span className="text-sm md:text-base font-medium text-white">
+                  and Sports Federation
+                </span>
+              </span>
             </div>
+
             <p className="text-blue-100 text-sm leading-relaxed">
-              The ultimate inter-school academic and sports championship. Empowering students through healthy
-              competition and excellence.
+              The ultimate inter-school Olympiad and sports championship.
+              Empowering students through healthy competition and excellence.
             </p>
             <div className="flex space-x-4">
-              <Link href="#" className="text-blue-200 hover:text-[var(--color-gold)] transition-colors">
+              <Link
+                href="#"
+                className="text-blue-200 hover:text-[var(--color-gold)] transition-colors"
+              >
                 <Facebook className="h-5 w-5" />
               </Link>
-              <Link href="#" className="text-blue-200 hover:text-[var(--color-gold)] transition-colors">
+              <Link
+                href="#"
+                className="text-blue-200 hover:text-[var(--color-gold)] transition-colors"
+              >
                 <Twitter className="h-5 w-5" />
               </Link>
-              <Link href="#" className="text-blue-200 hover:text-[var(--color-gold)] transition-colors">
+              <Link
+                href="#"
+                className="text-blue-200 hover:text-[var(--color-gold)] transition-colors"
+              >
                 <Instagram className="h-5 w-5" />
               </Link>
-              <Link href="#" className="text-blue-200 hover:text-[var(--color-gold)] transition-colors">
+              <Link
+                href="#"
+                className="text-blue-200 hover:text-[var(--color-gold)] transition-colors"
+              >
                 <Youtube className="h-5 w-5" />
               </Link>
             </div>
@@ -37,7 +62,10 @@ export function Footer() {
             <h3 className="font-semibold text-lg">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/events" className="text-blue-100 hover:text-[var(--color-gold)] transition-colors">
+                <Link
+                  href="/events"
+                  className="text-blue-100 hover:text-[var(--color-gold)] transition-colors"
+                >
                   Events
                 </Link>
               </li>
@@ -58,12 +86,18 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/leaderboard" className="text-blue-100 hover:text-[var(--color-gold)] transition-colors">
+                <Link
+                  href="/leaderboard"
+                  className="text-blue-100 hover:text-[var(--color-gold)] transition-colors"
+                >
                   Leaderboard
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="text-blue-100 hover:text-[var(--color-gold)] transition-colors">
+                <Link
+                  href="/faq"
+                  className="text-blue-100 hover:text-[var(--color-gold)] transition-colors"
+                >
                   FAQ
                 </Link>
               </li>
@@ -83,20 +117,22 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/events/sports" className="text-blue-100 hover:text-[var(--color-gold)] transition-colors">
+                <Link
+                  href="/events/sports"
+                  className="text-blue-100 hover:text-[var(--color-gold)] transition-colors"
+                >
                   Sports Tournaments
                 </Link>
               </li>
               <li>
-                <Link href="/events/essay" className="text-blue-100 hover:text-[var(--color-gold)] transition-colors">
+                <Link
+                  href="/events/essay"
+                  className="text-blue-100 hover:text-[var(--color-gold)] transition-colors"
+                >
                   Essay Writing
                 </Link>
               </li>
-              <li>
-                <Link href="/sponsorship" className="text-blue-100 hover:text-[var(--color-gold)] transition-colors">
-                  Sponsorship
-                </Link>
-              </li>
+              <li></li>
             </ul>
           </div>
 
@@ -106,18 +142,18 @@ export function Footer() {
             <div className="space-y-3 text-sm">
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-[var(--color-gold)]" />
-                <span className="text-blue-100">info@schooloftheyear.com</span>
+                <span className="text-blue-100">info@interschoolosf.in</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-[var(--color-gold)]" />
-                <span className="text-blue-100">+91 98765 43210</span>
+                <span className="text-blue-100">+91 93265 84482</span>
               </div>
               <div className="flex items-start space-x-2">
                 <MapPin className="h-4 w-4 text-[var(--color-gold)] mt-0.5" />
                 <span className="text-blue-100">
-                  Championship Venue
+                  Kalyan , Mumbai
                   <br />
-                  City, State - 123456
+                  Maharashtra- 421306
                 </span>
               </div>
             </div>
@@ -125,17 +161,23 @@ export function Footer() {
         </div>
 
         <div className="border-t border-blue-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center text-sm">
-          <p className="text-blue-100">© 2024 School of the Year. All rights reserved.</p>
+          <p className="text-blue-100">© 2025 School of the Year .</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="/privacy" className="text-blue-100 hover:text-[var(--color-gold)] transition-colors">
+            <Link
+              href="/privacy"
+              className="text-blue-100 hover:text-[var(--color-gold)] transition-colors"
+            >
               Privacy Policy
             </Link>
-            <Link href="/terms" className="text-blue-100 hover:text-[var(--color-gold)] transition-colors">
+            <Link
+              href="/terms"
+              className="text-blue-100 hover:text-[var(--color-gold)] transition-colors"
+            >
               Terms of Service
             </Link>
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }

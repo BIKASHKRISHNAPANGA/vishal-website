@@ -16,27 +16,30 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 })
 
+
 export const metadata: Metadata = {
-  title: "School of the Year - Inter-School Academic & Sports Championship",
+  title: "IOSF",
   description:
     "Join the ultimate inter-school competition featuring academic challenges and sports events. Win scholarships, trophies, and certificates. Register your school today!",
-  keywords:
-    "school competition, academic championship, sports tournament, inter-school, scholarships, student competition",
-  authors: [{ name: "School of the Year" }],
-  creator: "School of the Year",
-  publisher: "School of the Year",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
+  keywords: [
+    "school competition",
+    "academic championship",
+    "sports tournament",
+    "inter-school",
+    "scholarships",
+    "student competition",
+  ],
+  authors: [{ name: "Interschool Olympiad and Sports Federation (IOSF)" }],
+  creator: "Bikash Krishna Panga",
+  publisher: "Interschool Olympiad and Sports Federation (IOSF)",
   metadataBase: new URL("https://schooloftheyear.com"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "School of the Year - Inter-School Championship",
-    description: "Ultimate inter-school academic and sports competition with scholarships and prizes",
+    title: "Interschool Olympiad and Sports Federation (IOSF)",
+    description:
+      "The ultimate inter-school academic and sports competition with scholarships and prizes.",
     url: "https://schooloftheyear.com",
     siteName: "School of the Year",
     images: [
@@ -52,23 +55,23 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "School of the Year - Inter-School Championship",
-    description: "Ultimate inter-school academic and sports competition with scholarships and prizes",
+    title: "Interschool Olympiad and Sports Federation (IOSF)",
+    description:
+      "The ultimate inter-school academic and sports competition with scholarships and prizes.",
     images: ["/og-image.jpg"],
+  },
+  icons: {
+    icon: "/favicon.ico", 
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
   },
-    generator: 'v0.dev'
-}
+  generator: "Next.js",
+};
+
 
 export default function RootLayout({
   children,
@@ -77,6 +80,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body className="antialiased">
         <ThemeProvider
           attribute="class"

@@ -24,13 +24,14 @@ import {
   Shield,
   Gift,
 } from "lucide-react";
+import Image from "next/image";
 
 // Countdown Timer Component
 function CountdownTimer() {
   const [timeLeft, setTimeLeft] = useState({
-    days: 15,
-    hours: 8,
-    minutes: 42,
+    days: 53,
+    hours: 23,
+    minutes: 15,
     seconds: 33,
   });
 
@@ -92,30 +93,23 @@ function ImageCarousel() {
 
   const images = [
     {
-      src: "/placeholder.svg?height=400&width=600",
+      src: "/Moments-of-excelence/prayag.png",
       alt: "Students celebrating academic victory",
     },
     {
-      src: "/placeholder.svg?height=400&width=600",
+      src: "/Moments-of-excelence/allu.png",
       alt: "Inter-school sports tournament",
     },
     {
-      src: "/placeholder.svg?height=400&width=600",
+      src: "/Moments-of-excelence/prayag2.png",
       alt: "Award ceremony with trophies",
     },
-    {
-      src: "/placeholder.svg?height=400&width=600",
-      alt: "Essay writing competition",
-    },
+    { src: "/placeholder.svg", alt: "Essay writing competition" },
   ];
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % images.length);
-  };
-
-  const prevSlide = () => {
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % images.length);
+  const prevSlide = () =>
     setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
-  };
 
   useEffect(() => {
     const timer = setInterval(nextSlide, 5000);
@@ -129,16 +123,23 @@ function ImageCarousel() {
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
         {images.map((image, index) => (
-          <div key={index} className="w-full flex-shrink-0">
-            <img
-              src={image.src || "/placeholder.svg"}
+          <div
+            key={index}
+            className="w-full flex-shrink-0 relative h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px]"
+          >
+            <Image
+              src={image.src}
               alt={image.alt}
-              className="w-full h-[300px] md:h-[400px] object-cover"
+              fill
+              className="object-cover w-full h-full"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority={index === 0} // preload first slide
             />
           </div>
         ))}
       </div>
 
+      {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
         className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
@@ -153,6 +154,7 @@ function ImageCarousel() {
         <ChevronRight className="h-5 w-5" />
       </button>
 
+      {/* Pagination Dots */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
         {images.map((_, index) => (
           <button
@@ -167,7 +169,6 @@ function ImageCarousel() {
     </div>
   );
 }
-
 // Testimonials Carousel Component
 function TestimonialsCarousel() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -342,6 +343,12 @@ export default function HomePage() {
             </div>
 
             <div className="animate-fade-in-up delay-200">
+              <h1 className="font-serif text-3xl md:text-5xl font-bold text-white leading-tight">
+                Interschool Olympiad <br />
+                <span className="block text-lg md:text-2xl font-medium mt-2">
+                  and Sports Federation
+                </span>
+              </h1>
               <h1 className="font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-white leading-none tracking-tight mb-4">
                 School of the{" "}
                 <span className="relative inline-block">
@@ -697,7 +704,7 @@ export default function HomePage() {
       </section>
 
       {/* Quick Highlights */}
-      <section className="py-16 bg-background">
+      {/* <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center space-y-2">
@@ -741,7 +748,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Why Participate Section */}
       <section className="py-16 bg-muted/30">

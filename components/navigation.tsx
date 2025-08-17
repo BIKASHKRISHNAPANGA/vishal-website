@@ -17,13 +17,13 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
-
+import Image from "next/image";
 const navigationItems = [
   { name: "Home", href: "/" },
   { name: "Schools", href: "/schools" },
   { name: "Events", href: "/events" },
   { name: "Books", href: "/books" },
-  { name: "Leaderboard", href: "/leaderboard" },
+  // { name: "Leaderboard", href: "/leaderboard" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -48,10 +48,19 @@ export function Navigation() {
 
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2">
-          <Trophy className="h-8 w-8 text-[var(--color-royal-blue)]" />
-          <span className="font-serif text-xl font-bold text-[var(--color-royal-blue)]">
-            School of the Year
-          </span>
+          <Image
+            src="/logo.png"
+            alt="Brand Logo"
+            width={60}
+            height={20}
+            priority
+          />
+          <span className="font-serif text-lg md:text-xl font-bold text-[var(--color-royal-blue)]">
+            Interschool Olympiad <br  />
+            <span className="text-sm md:text-base font-medium text-gray-600">
+              and Sports Federation
+            </span>
+            </span>
         </Link>
 
         {/* Desktop Navigation */}

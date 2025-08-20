@@ -129,9 +129,12 @@ export default function SchoolRegisterPage() {
             <Badge className="bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold)]/90 text-sm px-4 py-2">
               School Registration
             </Badge>
-            <h1 className="font-serif text-3xl md:text-5xl font-bold">Register Your School</h1>
+            <h1 className="font-serif text-3xl md:text-5xl font-bold">
+              Register Your School
+            </h1>
             <p className="text-blue-100 text-lg max-w-2xl mx-auto">
-              Join the most prestigious inter-school championship and provide your students with opportunities to excel
+              Join the most prestigious inter-school championship and provide
+              your students with opportunities to excel
             </p>
           </div>
         </div>
@@ -155,7 +158,10 @@ export default function SchoolRegisterPage() {
                     <form onSubmit={handleSubmit} className="space-y-6">
                       {/* School Name */}
                       <div className="space-y-2">
-                        <Label htmlFor="schoolName" className="flex items-center space-x-2">
+                        <Label
+                          htmlFor="schoolName"
+                          className="flex items-center space-x-2"
+                        >
                           <School className="h-4 w-4" />
                           <span>School Name *</span>
                         </Label>
@@ -172,7 +178,10 @@ export default function SchoolRegisterPage() {
 
                       {/* Principal Name */}
                       <div className="space-y-2">
-                        <Label htmlFor="principalName" className="flex items-center space-x-2">
+                        <Label
+                          htmlFor="principalName"
+                          className="flex items-center space-x-2"
+                        >
                           <User className="h-4 w-4" />
                           <span>Principal's Name *</span>
                         </Label>
@@ -190,7 +199,10 @@ export default function SchoolRegisterPage() {
                       {/* Contact Information */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-2">
-                          <Label htmlFor="contactNumber" className="flex items-center space-x-2">
+                          <Label
+                            htmlFor="contactNumber"
+                            className="flex items-center space-x-2"
+                          >
                             <Phone className="h-4 w-4" />
                             <span>Contact Number *</span>
                           </Label>
@@ -207,7 +219,10 @@ export default function SchoolRegisterPage() {
                         </div>
 
                         <div className="space-y-2">
-                          <Label htmlFor="email" className="flex items-center space-x-2">
+                          <Label
+                            htmlFor="email"
+                            className="flex items-center space-x-2"
+                          >
                             <Mail className="h-4 w-4" />
                             <span>Email Address *</span>
                           </Label>
@@ -226,7 +241,10 @@ export default function SchoolRegisterPage() {
 
                       {/* Address */}
                       <div className="space-y-2">
-                        <Label htmlFor="address" className="flex items-center space-x-2">
+                        <Label
+                          htmlFor="address"
+                          className="flex items-center space-x-2"
+                        >
                           <MapPin className="h-4 w-4" />
                           <span>School Address *</span>
                         </Label>
@@ -244,10 +262,15 @@ export default function SchoolRegisterPage() {
 
                       {/* School Logo Upload */}
                       <div className="space-y-2">
-                        <Label htmlFor="schoolLogo" className="flex items-center space-x-2">
+                        <Label
+                          htmlFor="schoolLogo"
+                          className="flex items-center space-x-2"
+                        >
                           <Upload className="h-4 w-4" />
                           <span>School Logo</span>
-                          <span className="text-xs text-muted-foreground">(Optional)</span>
+                          <span className="text-xs text-muted-foreground">
+                            (Optional)
+                          </span>
                         </Label>
                         <Input
                           id="schoolLogo"
@@ -258,7 +281,8 @@ export default function SchoolRegisterPage() {
                           className="focus:ring-[var(--color-royal-blue)]"
                         />
                         <p className="text-xs text-muted-foreground">
-                          Upload your school logo (PNG, JPG, or SVG format, max 2MB)
+                          Upload your school logo (PNG, JPG, or SVG format, max
+                          2MB)
                         </p>
                       </div>
 
@@ -270,18 +294,27 @@ export default function SchoolRegisterPage() {
                             checked={formData.bulkUpload}
                             onCheckedChange={handleCheckboxChange("bulkUpload")}
                           />
-                          <Label htmlFor="bulkUpload" className="flex items-center space-x-2 cursor-pointer">
+                          <Label
+                            htmlFor="bulkUpload"
+                            className="flex items-center space-x-2 cursor-pointer"
+                          >
                             <Users className="h-4 w-4" />
-                            <span>I want to upload student data in bulk via Excel</span>
+                            <span>
+                              I want to upload student data in bulk via Excel
+                            </span>
                           </Label>
                         </div>
                         {formData.bulkUpload && (
                           <div className="text-sm text-muted-foreground space-y-2">
                             <p>
-                              <strong>Note:</strong> After school registration, you'll receive an Excel template to
-                              upload multiple students at once.
+                              <strong>Note:</strong> After school registration,
+                              you'll receive an Excel template to upload
+                              multiple students at once.
                             </p>
-                            <p>This option is recommended for schools with 10+ participating students.</p>
+                            <p>
+                              This option is recommended for schools with 10+
+                              participating students.
+                            </p>
                           </div>
                         )}
                       </div>
@@ -294,16 +327,26 @@ export default function SchoolRegisterPage() {
                           onCheckedChange={handleCheckboxChange("agreeTerms")}
                           className="mt-1"
                         />
-                        <Label htmlFor="agreeTerms" className="text-sm cursor-pointer">
+                        <Label
+                          htmlFor="agreeTerms"
+                          className="text-sm cursor-pointer"
+                        >
                           I agree to the{" "}
-                          <a href="/terms" className="text-[var(--color-royal-blue)] hover:underline">
+                          <a
+                            href="/terms"
+                            className="text-[var(--color-royal-blue)] hover:underline"
+                          >
                             Terms and Conditions
                           </a>{" "}
                           and{" "}
-                          <a href="/privacy" className="text-[var(--color-royal-blue)] hover:underline">
+                          <a
+                            href="/privacy"
+                            className="text-[var(--color-royal-blue)] hover:underline"
+                          >
                             Privacy Policy
                           </a>
-                          . I confirm that all information provided is accurate and complete.
+                          . I confirm that all information provided is accurate
+                          and complete.
                         </Label>
                       </div>
 
@@ -326,7 +369,9 @@ export default function SchoolRegisterPage() {
                 {/* Registration Benefits */}
                 <Card className="border-0 shadow-lg">
                   <CardHeader className="bg-[var(--color-gold)] text-black">
-                    <CardTitle className="text-lg">Registration Benefits</CardTitle>
+                    <CardTitle className="text-lg">
+                      Registration Benefits
+                    </CardTitle>
                   </CardHeader>
                   <CardContent className="p-4 space-y-3">
                     <div className="flex items-center space-x-2 text-sm">
@@ -362,21 +407,41 @@ export default function SchoolRegisterPage() {
                   </CardHeader>
                   <CardContent className="p-4 space-y-3 text-sm">
                     <p>
-                      <strong>Registration Deadline:</strong> October 20, 2024
+                      <strong>Registration Deadline:</strong> October 10, 2025
                     </p>
                     <p>
-                      <strong>Student Categories:</strong> 5th-6th, 7th-8th, 9th-10th grades
+                      <p>
+                        <strong>Student Categories:</strong>
+                      </p>
+                      <div className="mt-2 space-y-3 text-sm text-muted-foreground">
+                        <div>
+                          <span className="font-medium text-foreground">
+                            Olympiad:
+                          </span>
+                          Category 1 – 5th/6th, Category 2 – 7th/8th, Category 3
+                          – 9th/10th
+                        </div>
+                        <div>
+                          <span className="font-medium text-foreground">
+                            Sports:
+                          </span>
+                          Category 1 – Under 12 (Boys & Girls), Category 2 –
+                          Under 14 (Boys & Girls), Category 3 – Under 16 (Boys &
+                          Girls)
+                        </div>
+                      </div>
                     </p>
                     <p>
-                      <strong>Events:</strong> Academic competitions, sports tournaments, and essay writing
+                      <strong>Events:</strong> Academic competitions, sports
+                      tournaments, and essay writing
                     </p>
                     <p>
                       <strong>Support:</strong> Email us at{" "}
                       <a
-                        href="mailto:schools@schooloftheyear.com"
+                        href="mailto:info@interschoolosf.in"
                         className="text-[var(--color-royal-blue)] hover:underline"
                       >
-                        schools@schooloftheyear.com
+                        info@interschoolosf.in
                       </a>
                     </p>
                   </CardContent>
@@ -385,7 +450,9 @@ export default function SchoolRegisterPage() {
                 {/* Next Steps */}
                 <Card className="border-0 shadow-lg">
                   <CardHeader className="bg-green-600 text-white">
-                    <CardTitle className="text-lg">After Registration</CardTitle>
+                    <CardTitle className="text-lg">
+                      After Registration
+                    </CardTitle>
                   </CardHeader>
                   <CardContent className="p-4 space-y-3 text-sm">
                     <div className="flex items-start space-x-2">
@@ -398,13 +465,17 @@ export default function SchoolRegisterPage() {
                       <div className="bg-[var(--color-gold)] text-black w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold mt-0.5">
                         2
                       </div>
-                      <span>Access school dashboard for student registration</span>
+                      <span>
+                        Access school dashboard for student registration
+                      </span>
                     </div>
                     <div className="flex items-start space-x-2">
                       <div className="bg-green-600 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold mt-0.5">
                         3
                       </div>
-                      <span>Register students individually or via bulk upload</span>
+                      <span>
+                        Register students individually or via bulk upload
+                      </span>
                     </div>
                   </CardContent>
                 </Card>
@@ -416,5 +487,5 @@ export default function SchoolRegisterPage() {
 
       <Footer />
     </div>
-  )
+  );
 }

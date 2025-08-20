@@ -1135,7 +1135,7 @@ export default function HomePage() {
             <Button
               size="lg"
               variant="outline"
-              className="border-[var(--color-royal-blue)] text-[var(--color-royal-blue)] hover:bg-[var(--color-royal-blue)] hover:text-white btn-hover-lift text-lg px-8 py-3 bg-transparent"
+              className="border-[var(--color-royal-blue)] text-[var(--color-royal-blue)] hover:bg-[var(--color-royal-blue)] hover:text-blue btn-hover-lift text-lg px-8 py-3 bg-transparent"
               asChild
             >
               <Link href="/schools/register">Register Your School</Link>

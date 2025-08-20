@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-
+import { Footer } from "@/components/footer"
 import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -27,24 +27,32 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Office Address",
-    details: ["123 Education Hub", "Sector 15, Gurgaon", "Haryana 122001, India"],
+    details: [
+      " Rai's Aragya",
+      "near smart point , 100ft road",
+      "kalyan east 421306, Maharashtra , India",
+    ],
   },
   {
     icon: Phone,
     title: "Phone Numbers",
-    details: ["+91 98765 43210", "+91 11 4567 8900", "Toll Free: 1800 123 4567"],
+    details: ["+91 93265 84482", "+91 90822 98108"],
   },
   {
     icon: Mail,
     title: "Email Addresses",
-    details: ["info@schooloftheyear.com", "support@schooloftheyear.com", "registrations@schooloftheyear.com"],
+    details: [
+      "info@interschoolosf.in",
+      "amitvedprakashpandey@gmail.com",
+      "thakurmahesh453@gmail.com",
+    ],
   },
   {
     icon: Clock,
     title: "Office Hours",
-    details: ["Monday - Friday: 9:00 AM - 6:00 PM", "Saturday: 10:00 AM - 4:00 PM", "Sunday: Closed"],
+    details: ["Monday - Saturday: 8:00 AM - 4:00 PM", "Sunday: Closed"],
   },
-]
+];
 
 const faqData = [
   {
@@ -81,30 +89,41 @@ const faqData = [
 
 const teamMembers = [
   {
-    name: "Dr. Rajesh Kumar",
-    role: "Competition Director",
-    email: "rajesh@schooloftheyear.com",
-    phone: "+91 98765 43210",
+    name: "Mr. Mahesh Kumar Vinod Thakur ",
+    role: "Chairman and Founder",
+    email: "thakurmahesh453@gmail.com",
+    phone: "+91 93265 84482",
+    img: "/team-mates/mahesh.jpg",
   },
   {
-    name: "Ms. Priya Sharma",
-    role: "Academic Coordinator",
-    email: "priya@schooloftheyear.com",
-    phone: "+91 98765 43211",
+    name: "Ms. Vishal Niranjan Kapal ",
+    role: "Founder and Director ( Sports Management)",
+    email: "kapalvishal7@gmail.com",
+    phone: "+91  90822 98108",
+    img: "/team-mates/vishal.jpg",
   },
   {
-    name: "Mr. Vikram Singh",
-    role: "Sports Coordinator",
-    email: "vikram@schooloftheyear.com",
-    phone: "+91 98765 43212",
+    name: "Mr. Shriniwas Ramkumar Gupta",
+    role: "Finance and Administrative Manager",
+    email: "Guptashree469@gmail.com",
+    phone: "+91 91525 37011",
+    img: "/team-mates/shribiwas.jpg",
   },
   {
-    name: "Ms. Anjali Patel",
-    role: "Registration Support",
-    email: "anjali@schooloftheyear.com",
-    phone: "+91 98765 43213",
+    name: "Ms. Amit Bedprakash pandey",
+    role: "Head of Digital Strategy and technology",
+    email: "amitvedprakashpandey@gmail.com",
+    phone: "+91 91379 76758",
+    img: "/team-mates/",
   },
-]
+  {
+    name: "Ms. Bikash Krishna Panga",
+    role: "Chief Technology Officer",
+    email: "pangsbikashkrishna@gmail.com",
+    phone: "+91 93482 58150",
+    img: "/team-mates/bikash.jpg",
+  },
+];
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -190,9 +209,12 @@ export default function ContactPage() {
             {/* Contact Form */}
             <div className="space-y-8">
               <div>
-                <h2 className="font-serif text-3xl font-bold text-[var(--color-royal-blue)] mb-4">Send us a Message</h2>
+                <h2 className="font-serif text-3xl font-bold text-[var(--color-royal-blue)] mb-4">
+                  Send us a Message
+                </h2>
                 <p className="text-muted-foreground">
-                  Fill out the form below and we'll get back to you as soon as possible.
+                  Fill out the form below and we'll get back to you as soon as
+                  possible.
                 </p>
               </div>
 
@@ -200,11 +222,17 @@ export default function ContactPage() {
                 <Card className="border-0 shadow-lg bg-green-50">
                   <CardContent className="p-8 text-center">
                     <CheckCircle className="h-16 w-16 text-green-600 mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold text-green-800 mb-2">Message Sent Successfully!</h3>
+                    <h3 className="text-xl font-semibold text-green-800 mb-2">
+                      Message Sent Successfully!
+                    </h3>
                     <p className="text-green-600">
-                      Thank you for contacting us. We'll respond to your inquiry within 24-48 hours.
+                      Thank you for contacting us. We'll respond to your inquiry
+                      within 24-48 hours.
                     </p>
-                    <Button onClick={() => setIsSubmitted(false)} className="mt-4 bg-green-600 hover:bg-green-700">
+                    <Button
+                      onClick={() => setIsSubmitted(false)}
+                      className="mt-4 bg-green-600 hover:bg-green-700"
+                    >
                       Send Another Message
                     </Button>
                   </CardContent>
@@ -228,7 +256,10 @@ export default function ContactPage() {
                           />
                         </div>
                         <div className="space-y-2">
-                          <label htmlFor="email" className="text-sm font-medium">
+                          <label
+                            htmlFor="email"
+                            className="text-sm font-medium"
+                          >
                             Email Address *
                           </label>
                           <Input
@@ -245,7 +276,10 @@ export default function ContactPage() {
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-2">
-                          <label htmlFor="phone" className="text-sm font-medium">
+                          <label
+                            htmlFor="phone"
+                            className="text-sm font-medium"
+                          >
                             Phone Number
                           </label>
                           <Input
@@ -257,7 +291,10 @@ export default function ContactPage() {
                           />
                         </div>
                         <div className="space-y-2">
-                          <label htmlFor="userType" className="text-sm font-medium">
+                          <label
+                            htmlFor="userType"
+                            className="text-sm font-medium"
+                          >
                             I am a *
                           </label>
                           <select
@@ -278,7 +315,10 @@ export default function ContactPage() {
                       </div>
 
                       <div className="space-y-2">
-                        <label htmlFor="subject" className="text-sm font-medium">
+                        <label
+                          htmlFor="subject"
+                          className="text-sm font-medium"
+                        >
                           Subject *
                         </label>
                         <Input
@@ -292,7 +332,10 @@ export default function ContactPage() {
                       </div>
 
                       <div className="space-y-2">
-                        <label htmlFor="message" className="text-sm font-medium">
+                        <label
+                          htmlFor="message"
+                          className="text-sm font-medium"
+                        >
                           Message *
                         </label>
                         <Textarea
@@ -332,9 +375,12 @@ export default function ContactPage() {
             {/* Contact Information */}
             <div className="space-y-8">
               <div>
-                <h2 className="font-serif text-3xl font-bold text-[var(--color-royal-blue)] mb-4">Get in Touch</h2>
+                <h2 className="font-serif text-3xl font-bold text-[var(--color-royal-blue)] mb-4">
+                  Get in Touch
+                </h2>
                 <p className="text-muted-foreground">
-                  Reach out to us through any of the following channels. We're here to help!
+                  Reach out to us through any of the following channels. We're
+                  here to help!
                 </p>
               </div>
 
@@ -347,9 +393,14 @@ export default function ContactPage() {
                           <info.icon className="h-6 w-6 text-white" />
                         </div>
                         <div className="space-y-1">
-                          <h3 className="font-semibold text-lg">{info.title}</h3>
+                          <h3 className="font-semibold text-lg">
+                            {info.title}
+                          </h3>
                           {info.details.map((detail, idx) => (
-                            <p key={idx} className="text-muted-foreground text-sm">
+                            <p
+                              key={idx}
+                              className="text-muted-foreground text-sm"
+                            >
                               {detail}
                             </p>
                           ))}
@@ -373,8 +424,12 @@ export default function ContactPage() {
                     For urgent inquiries, call our helpline directly:
                   </p>
                   <div className="space-y-2">
-                    <div className="text-lg font-semibold text-[var(--color-royal-blue)]">+91 98765 43210</div>
-                    <div className="text-sm text-muted-foreground">Available: Mon-Fri, 9 AM - 6 PM</div>
+                    <div className="text-lg font-semibold text-[var(--color-royal-blue)]">
+                      +91 93265 84482
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Available: Mon-Sat, 8 AM - 4 PM
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -387,73 +442,67 @@ export default function ContactPage() {
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="font-serif text-3xl font-bold text-[var(--color-royal-blue)] mb-4">Meet Our Team</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Our dedicated team is here to ensure your competition experience is smooth and successful
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {teamMembers.map((member, index) => (
-              <Card key={index} className="border-0 shadow-lg text-center">
-                <CardContent className="p-6">
-                  <div className="w-16 h-16 bg-[var(--color-royal-blue)] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Users className="h-8 w-8 text-white" />
-                  </div>
-                  <h3 className="font-semibold text-lg mb-1">{member.name}</h3>
-                  <p className="text-[var(--color-royal-blue)] text-sm mb-3">{member.role}</p>
-                  <div className="space-y-1 text-xs text-muted-foreground">
-                    <div className="flex items-center justify-center space-x-1">
-                      <Mail className="h-3 w-3" />
-                      <span>{member.email}</span>
-                    </div>
-                    <div className="flex items-center justify-center space-x-1">
-                      <Phone className="h-3 w-3" />
-                      <span>{member.phone}</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
             <h2 className="font-serif text-3xl font-bold text-[var(--color-royal-blue)] mb-4">
-              Frequently Asked Questions
+              Meet Our Team
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Find answers to common questions about the School of the Year competition
+              Our dedicated team is here to ensure your competition experience
+              is smooth and successful
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-4">
-            {faqData.map((faq, index) => (
-              <Card key={index} className="border-0 shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-start space-x-3 text-lg">
-                    <HelpCircle className="h-5 w-5 text-[var(--color-royal-blue)] mt-0.5" />
-                    <span>{faq.question}</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground pl-8">{faq.answer}</p>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-auto-fit gap-8"
+     style={{ gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))" }}>
+  {teamMembers.map((member, index) => (
+    <Card
+      key={index}
+      className="border-0 shadow-xl rounded-2xl overflow-hidden hover:shadow-2xl transition-shadow duration-300"
+    >
+      <CardContent className="p-0">
+        {/* Profile Image */}
+        <div className="relative flex justify-center pt-5">
+          <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg">
+            <img
+              src={member.img}
+              alt={member.name}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/20 hover:bg-black/40 transition duration-300 flex items-center justify-center opacity-0 hover:opacity-100 rounded-full">
+              <a
+                href={`mailto:${member.email}`}
+                className="bg-white text-[var(--color-royal-blue)] text-xs font-medium px-3 py-1 rounded-full shadow-md"
+              >
+                Contact
+              </a>
+            </div>
           </div>
+        </div>
 
-          <div className="text-center mt-12">
-            <p className="text-muted-foreground mb-4">Still have questions?</p>
-            <Button className="bg-[var(--color-royal-blue)] hover:bg-[var(--color-royal-blue)]/90">
-              <MessageCircle className="h-4 w-4 mr-2" />
-              Contact Support
-            </Button>
+        {/* Member Info */}
+        <div className="p-5 text-center">
+          <h3 className="font-bold text-lg text-gray-900 mb-1">
+            {member.name}
+          </h3>
+          <p className="text-[var(--color-royal-blue)] font-medium text-sm mb-3">
+            {member.role}
+          </p>
+
+          <div className="space-y-2 text-sm text-gray-600">
+            <div className="flex items-center justify-center space-x-2">
+              <Mail className="h-4 w-4 text-[var(--color-royal-blue)]" />
+              <span>{member.email}</span>
+            </div>
+            <div className="flex items-center justify-center space-x-2">
+              <Phone className="h-4 w-4 text-[var(--color-royal-blue)]" />
+              <span>{member.phone}</span>
+            </div>
           </div>
+        </div>
+      </CardContent>
+    </Card>
+  ))}
+</div>
+
         </div>
       </section>
 
@@ -461,8 +510,12 @@ export default function ContactPage() {
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="font-serif text-3xl font-bold text-[var(--color-royal-blue)] mb-4">Visit Our Office</h2>
-            <p className="text-muted-foreground text-lg">Located in the heart of Gurgaon's education district</p>
+            <h2 className="font-serif text-3xl font-bold text-[var(--color-royal-blue)] mb-4">
+              Visit Our Office
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Located in the heart of kalyan district
+            </p>
           </div>
 
           <div className="max-w-4xl mx-auto">
@@ -471,7 +524,10 @@ export default function ContactPage() {
                 <div className="text-center space-y-2">
                   <MapPin className="h-12 w-12 text-[var(--color-royal-blue)] mx-auto" />
                   <p className="text-muted-foreground">Interactive Map</p>
-                  <p className="text-sm text-muted-foreground">123 Education Hub, Sector 15, Gurgaon</p>
+                  <p className="text-sm text-muted-foreground">
+                    Rai's Aragya, near smart point , 100ft road, kalyan east
+                    421306
+                  </p>
                 </div>
               </div>
               <CardContent className="p-6">
@@ -479,17 +535,23 @@ export default function ContactPage() {
                   <div className="space-y-1">
                     <Calendar className="h-5 w-5 text-[var(--color-royal-blue)] mx-auto" />
                     <div className="text-sm font-medium">Office Hours</div>
-                    <div className="text-xs text-muted-foreground">Mon-Fri: 9 AM - 6 PM</div>
+                    <div className="text-xs text-muted-foreground">
+                      Mon-Sat: 8 AM - 4 PM
+                    </div>
                   </div>
                   <div className="space-y-1">
                     <Phone className="h-5 w-5 text-[var(--color-royal-blue)] mx-auto" />
                     <div className="text-sm font-medium">Call Us</div>
-                    <div className="text-xs text-muted-foreground">+91 98765 43210</div>
+                    <div className="text-xs text-muted-foreground">
+                      +91 93265 84482
+                    </div>
                   </div>
                   <div className="space-y-1">
                     <Mail className="h-5 w-5 text-[var(--color-royal-blue)] mx-auto" />
                     <div className="text-sm font-medium">Email Us</div>
-                    <div className="text-xs text-muted-foreground">info@schooloftheyear.com</div>
+                    <div className="text-xs text-muted-foreground">
+                      info@interschoolosf.in
+                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -497,6 +559,7 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
-  )
+  );
 }

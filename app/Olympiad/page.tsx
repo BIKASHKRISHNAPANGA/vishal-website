@@ -552,7 +552,7 @@ export default function OlympiadPage() {
                       </li>
                       <li className="flex items-start space-x-2">
                         <FileText className="h-3 w-3 md:h-4 md:w-4 text-purple-600 mt-0.5" />
-                        <span>Word limit: 500-800 words</span>
+                        <span>Word limit: 250-300 words</span>
                       </li>
                       <li className="flex items-start space-x-2">
                         <BookOpen className="h-3 w-3 md:h-4 md:w-4 text-purple-600 mt-0.5" />

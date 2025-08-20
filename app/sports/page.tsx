@@ -255,36 +255,28 @@ export default function SportsEventsPage() {
               Compete in Team Sports • Individual Events • Traditional Games
             </p>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto text-center">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto text-center">
               <div className="space-y-1">
-                <div className="text-xl md:text-2xl font-bold text-[var(--color-gold)]">
-                  14
+                <div className="text-2xl md:text-3xl font-bold text-[var(--color-gold)]">
+                  15
                 </div>
-                <div className="text-xs md:text-sm text-blue-200">
+                <div className="text-sm md:text-base text-blue-200">
                   Sports Events
                 </div>
               </div>
               <div className="space-y-1">
-                <div className="text-xl md:text-2xl font-bold text-[var(--color-gold)]">
+                <div className="text-2xl md:text-3xl font-bold text-[var(--color-gold)]">
                   3
                 </div>
-                <div className="text-xs md:text-sm text-blue-200">
+                <div className="text-sm md:text-base text-blue-200">
                   Age Categories
                 </div>
               </div>
               <div className="space-y-1">
-                <div className="text-xl md:text-2xl font-bold text-[var(--color-gold)]">
-                  2
+                <div className="text-2xl md:text-3xl font-bold text-[var(--color-gold)]">
+                  ₹299-749
                 </div>
-                <div className="text-xs md:text-sm text-blue-200">
-                  Competition Days
-                </div>
-              </div>
-              <div className="space-y-1">
-                <div className="text-xl md:text-2xl font-bold text-[var(--color-gold)]">
-                  ₹293-299
-                </div>
-                <div className="text-xs md:text-sm text-blue-200">
+                <div className="text-sm md:text-base text-blue-200">
                   Registration Fee
                 </div>
               </div>
@@ -486,28 +478,15 @@ export default function SportsEventsPage() {
                       <li className="flex items-start space-x-2">
                         <CheckCircle className="h-3 w-3 md:h-4 md:w-4 text-green-600 mt-0.5" />
                         <span>
-                          <strong>Registration Deadline:</strong> October 20,
-                          2024
+                          <strong>Registration Deadline:</strong> October 10,
+                          2025
                         </span>
                       </li>
                       <li className="flex items-start space-x-2">
                         <CheckCircle className="h-3 w-3 md:h-4 md:w-4 text-green-600 mt-0.5" />
                         <span>
-                          <strong>Team List Submission:</strong> October 25,
-                          2024
-                        </span>
-                      </li>
-                      <li className="flex items-start space-x-2">
-                        <CheckCircle className="h-3 w-3 md:h-4 md:w-4 text-green-600 mt-0.5" />
-                        <span>
-                          <strong>Tournament Dates:</strong> November 15-16,
-                          2024
-                        </span>
-                      </li>
-                      <li className="flex items-start space-x-2">
-                        <CheckCircle className="h-3 w-3 md:h-4 md:w-4 text-green-600 mt-0.5" />
-                        <span>
-                          <strong>Prize Distribution:</strong> November 17, 2024
+                          <strong>Team List Submission:</strong> October 10,
+                          2025
                         </span>
                       </li>
                     </ul>
@@ -552,16 +531,8 @@ export default function SportsEventsPage() {
                       roster with substitutes
                     </div>
                     <div>
-                      <strong>Medical Certificate:</strong> Required for all
-                      participants
-                    </div>
-                    <div>
                       <strong>Age Proof:</strong> Birth certificate or school ID
-                      required
-                    </div>
-                    <div>
-                      <strong>Insurance:</strong> Covered by school/parents for
-                      all events
+                      or addhar card required
                     </div>
                   </div>
                 </div>
@@ -601,10 +572,6 @@ export default function SportsEventsPage() {
           </div>
 
           <div className="mt-6 md:mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 text-xs md:text-sm text-blue-200">
-            <div className="flex items-center gap-2">
-              <Users className="h-3 w-3 md:h-4 md:w-4" />
-              <span>5,000+ athletes participating</span>
-            </div>
             <div className="flex items-center gap-2">
               <Zap className="h-3 w-3 md:h-4 md:w-4" />
               <span>Professional sports facilities</span>

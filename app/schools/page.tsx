@@ -20,11 +20,13 @@ export default function SchoolsPage() {
             </Badge>
 
             <h1 className="font-serif text-4xl md:text-6xl font-bold leading-tight">
-              Register Your <span className="text-[var(--color-gold)]">School</span>
+              Register Your{" "}
+              <span className="text-[var(--color-gold)]">School</span>
             </h1>
 
             <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-              Join the most prestigious inter-school championship and give your students the opportunity to excel
+              Join the most prestigious inter-school championship and give your
+              students the opportunity to excel
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -56,7 +58,8 @@ export default function SchoolsPage() {
               Why Register Your School?
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Provide your students with unparalleled opportunities for growth, recognition, and success
+              Provide your students with unparalleled opportunities for growth,
+              recognition, and success
             </p>
           </div>
 
@@ -66,9 +69,12 @@ export default function SchoolsPage() {
                 <div className="bg-[var(--color-royal-blue)]/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto">
                   <Trophy className="h-8 w-8 text-[var(--color-royal-blue)]" />
                 </div>
-                <h3 className="font-semibold text-xl">Prestige & Recognition</h3>
+                <h3 className="font-semibold text-xl">
+                  Prestige & Recognition
+                </h3>
                 <p className="text-muted-foreground">
-                  Enhance your school's reputation by participating in the most prestigious inter-school championship
+                  Enhance your school's reputation by participating in the most
+                  prestigious inter-school championship
                 </p>
               </CardContent>
             </Card>
@@ -80,7 +86,8 @@ export default function SchoolsPage() {
                 </div>
                 <h3 className="font-semibold text-xl">Student Scholarships</h3>
                 <p className="text-muted-foreground">
-                  Your students can win merit-based scholarships worth lakhs for their higher education
+                  Your students can win merit-based scholarships worth lakhs for
+                  their higher education
                 </p>
               </CardContent>
             </Card>
@@ -92,7 +99,8 @@ export default function SchoolsPage() {
                 </div>
                 <h3 className="font-semibold text-xl">Skill Development</h3>
                 <p className="text-muted-foreground">
-                  Comprehensive academic and sports competitions that enhance student capabilities
+                  Comprehensive academic and sports competitions that enhance
+                  student capabilities
                 </p>
               </CardContent>
             </Card>
@@ -104,7 +112,8 @@ export default function SchoolsPage() {
                 </div>
                 <h3 className="font-semibold text-xl">Networking</h3>
                 <p className="text-muted-foreground">
-                  Connect with other leading educational institutions and share best practices
+                  Connect with other leading educational institutions and share
+                  best practices
                 </p>
               </CardContent>
             </Card>
@@ -116,7 +125,8 @@ export default function SchoolsPage() {
                 </div>
                 <h3 className="font-semibold text-xl">Brand Building</h3>
                 <p className="text-muted-foreground">
-                  Showcase your school's excellence and attract quality students and faculty
+                  Showcase your school's excellence and attract quality students
+                  and faculty
                 </p>
               </CardContent>
             </Card>
@@ -128,7 +138,8 @@ export default function SchoolsPage() {
                 </div>
                 <h3 className="font-semibold text-xl">Easy Management</h3>
                 <p className="text-muted-foreground">
-                  Simple registration process with bulk student upload and comprehensive support
+                  Simple registration process with bulk student upload and
+                  comprehensive support
                 </p>
               </CardContent>
             </Card>
@@ -155,7 +166,8 @@ export default function SchoolsPage() {
               </div>
               <h3 className="font-semibold text-lg">School Registration</h3>
               <p className="text-muted-foreground text-sm">
-                Fill out the school registration form with basic details and upload your school logo
+                Fill out the school registration form with basic details and
+                upload your school logo
               </p>
             </div>
 
@@ -165,7 +177,8 @@ export default function SchoolsPage() {
               </div>
               <h3 className="font-semibold text-lg">Student Registration</h3>
               <p className="text-muted-foreground text-sm">
-                Register students individually or upload bulk data via Excel for multiple students
+                Register students individually or upload bulk data via Excel for
+                multiple students
               </p>
             </div>
 
@@ -175,7 +188,8 @@ export default function SchoolsPage() {
               </div>
               <h3 className="font-semibold text-lg">Confirmation</h3>
               <p className="text-muted-foreground text-sm">
-                Receive confirmation email with registration details and further instructions
+                Receive confirmation email with registration details and further
+                instructions
               </p>
             </div>
           </div>
@@ -196,17 +210,84 @@ export default function SchoolsPage() {
                   <Calendar className="h-5 w-5 text-[var(--color-royal-blue)] mt-1" />
                   <div>
                     <h4 className="font-semibold">Registration Deadline</h4>
-                    <p className="text-muted-foreground text-sm">October 20, 2024 - Don't miss out!</p>
+                    <p className="text-muted-foreground text-sm">
+                      October 10, 2025 - Don't miss out!
+                    </p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-3">
                   <Users className="h-5 w-5 text-[var(--color-royal-blue)] mt-1" />
                   <div>
-                    <h4 className="font-semibold">Student Categories</h4>
-                    <p className="text-muted-foreground text-sm">
-                      Category 1: 5th/6th, Category 2: 7th/8th, Category 3: 9th/10th
-                    </p>
+                    <h4 className="font-semibold mb-4">Student Categories</h4>
+
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                      {/* Olympiad Table */}
+                      <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+                        <table className="w-full text-sm">
+                          <thead className="bg-gray-100">
+                            <tr>
+                              <th className="px-4 py-3 text-left font-semibold">
+                                Olympiad
+                              </th>
+                              <th className="px-4 py-3 text-left font-semibold">
+                                Classes
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-gray-200">
+                            <tr>
+                              <td className="px-4 py-3">Category 1</td>
+                              <td className="px-4 py-3">5th – 6th</td>
+                            </tr>
+                            <tr>
+                              <td className="px-4 py-3">Category 2</td>
+                              <td className="px-4 py-3">7th – 8th</td>
+                            </tr>
+                            <tr>
+                              <td className="px-4 py-3">Category 3</td>
+                              <td className="px-4 py-3">9th – 10th</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                      {/* Sports Table */}
+                      <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+                        <table className="w-full text-sm">
+                          <thead className="bg-gray-100">
+                            <tr>
+                              <th className="px-4 py-3 text-left font-semibold">
+                                Sports
+                              </th>
+                              <th className="px-4 py-3 text-left font-semibold">
+                                Age Group
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-gray-200">
+                            <tr>
+                              <td className="px-4 py-3">Category 1</td>
+                              <td className="px-4 py-3">
+                                Under 12 (Boys & Girls)
+                              </td>
+                            </tr>
+                            <tr>
+                              <td className="px-4 py-3">Category 2</td>
+                              <td className="px-4 py-3">
+                                Under 14 (Boys & Girls)
+                              </td>
+                            </tr>
+                            <tr>
+                              <td className="px-4 py-3">Category 3</td>
+                              <td className="px-4 py-3">
+                                Under 16 (Boys & Girls)
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -225,7 +306,8 @@ export default function SchoolsPage() {
                   <div>
                     <h4 className="font-semibold">Email Confirmation</h4>
                     <p className="text-muted-foreground text-sm">
-                      Instant confirmation email with registration details and next steps
+                      Instant confirmation email with registration details and
+                      next steps
                     </p>
                   </div>
                 </div>
@@ -234,7 +316,9 @@ export default function SchoolsPage() {
 
             <Card className="border-0 shadow-lg">
               <CardHeader className="bg-[var(--color-royal-blue)] text-white">
-                <CardTitle className="text-center">Ready to Register?</CardTitle>
+                <CardTitle className="text-center">
+                  Ready to Register?
+                </CardTitle>
               </CardHeader>
               <CardContent className="p-6 space-y-4">
                 <p className="text-center text-muted-foreground">
@@ -285,5 +369,5 @@ export default function SchoolsPage() {
 
       <Footer />
     </div>
-  )
+  );
 }

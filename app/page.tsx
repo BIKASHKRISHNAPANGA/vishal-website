@@ -104,7 +104,7 @@ function ImageCarousel() {
       src: "/Moments-of-excelence/prayag2.png",
       alt: "Award ceremony with trophies",
     },
-    { src: "/placeholder.svg", alt: "Essay writing competition" },
+   
   ];
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % images.length);
@@ -131,9 +131,9 @@ function ImageCarousel() {
               src={image.src}
               alt={image.alt}
               fill
-              className="object-cover w-full h-full"
+              className="object-contain w-full h-full bg-black" // bg-black (or any) to make borders visible
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              priority={index === 0} // preload first slide
+              priority={index === 0}
             />
           </div>
         ))}
@@ -169,25 +169,272 @@ function ImageCarousel() {
     </div>
   );
 }
+
+interface NoticeType {
+  id: string;
+  title: string;
+  date: string;
+  type: "result" | "admission" | "announcement" | "answer-key";
+  category: "sports" | "olympiad" | "general";
+  urgent?: boolean;
+}
+
+// Mock API functions (replace with actual backend calls)
+const fetchSportsNotices = async (): Promise<NoticeType[]> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve([
+        {
+          id: "cricket-result-2025",
+          title:
+            "Declaration of Results for Inter-School Cricket Championship 2025 - State Level Finals",
+          date: "2025-08-18",
+          type: "result",
+          category: "sports",
+        },
+        {
+          id: "athletics-selection",
+          title:
+            "Selection List for National Athletics Meet 2025 - District Wise Merit List Published",
+          date: "2025-08-17",
+          type: "result",
+          category: "sports",
+        },
+        {
+          id: "swimming-schedule",
+          title:
+            "Revised Schedule for State Swimming Championship 2025 - Venue and Timing Updates",
+          date: "2025-08-16",
+          type: "announcement",
+          category: "sports",
+        },
+        {
+          id: "football-registration",
+          title:
+            "Extended Registration for School Football League 2025 - Last Date Extended",
+          date: "2025-08-15",
+          type: "admission",
+          category: "sports",
+        },
+        {
+          id: "sports-guidelines",
+          title:
+            "Updated Guidelines for Sports Equipment and Safety Protocols - All Disciplines",
+          date: "2025-08-14",
+          type: "announcement",
+          category: "sports",
+        },
+      ]);
+    }, 500);
+  });
+};
+
+const fetchOlympiadNotices = async (): Promise<NoticeType[]> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve([
+        {
+          id: "math-olympiad-result",
+          title:
+            "Declaration of Results for International Mathematical Olympiad 2025 - Regional Selection",
+          date: "2025-08-18",
+          type: "result",
+          category: "olympiad",
+        },
+        {
+          id: "science-olympiad-selection",
+          title:
+            "Selection List for National Science Olympiad 2025 - Merit List and Cut-off Marks",
+          date: "2025-08-17",
+          type: "result",
+          category: "olympiad",
+        },
+        {
+          id: "physics-olympiad-keys",
+          title:
+            "Final Answer Keys for International Physics Olympiad Preliminary Exam 2025",
+          date: "2025-08-16",
+          type: "answer-key",
+          category: "olympiad",
+        },
+        {
+          id: "chemistry-olympiad-schedule",
+          title:
+            "Revised Exam Schedule for National Chemistry Olympiad 2025 - Important Updates",
+          date: "2025-08-15",
+          type: "announcement",
+          category: "olympiad",
+        },
+        {
+          id: "coding-olympiad-registration",
+          title:
+            "Extended Registration for International Coding Olympiad 2025 - Last Date Notification",
+          date: "2025-08-14",
+          type: "admission",
+          category: "olympiad",
+        },
+      ]);
+    }, 500);
+  });
+};
+
+function SportsOlympiadNotices() {
+  const [activeTab, setActiveTab] = useState<"sports" | "olympiad">("sports");
+  const [sportsNotices, setSportsNotices] = useState<NoticeType[]>([]);
+  const [olympiadNotices, setOlympiadNotices] = useState<NoticeType[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const [sports, olympiad] = await Promise.all([
+          fetchSportsNotices(),
+          fetchOlympiadNotices(),
+        ]);
+        setSportsNotices(sports);
+        setOlympiadNotices(olympiad);
+      } catch (error) {
+        console.error("Error loading data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  const handleNoticeClick = (notice: NoticeType) => {
+    if (notice.category === "sports") {
+      window.open(`/sports/${notice.id}`, "_blank");
+    } else if (notice.category === "olympiad") {
+      window.open(`/olympiad/${notice.id}`, "_blank");
+    }
+  };
+
+  const handleViewMore = () => {
+    if (activeTab === "sports") {
+      window.open("/sports", "_blank");
+    } else {
+      window.open("/olympiad", "_blank");
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="max-w-4xl mx-auto p-4 sm:p-6">
+        <div className="bg-gray-50 rounded-lg p-6">
+          <div className="animate-pulse space-y-4">
+            <div className="h-4 bg-gray-300 rounded w-1/4"></div>
+            <div className="space-y-3">
+              <div className="h-3 bg-gray-300 rounded"></div>
+              <div className="h-3 bg-gray-300 rounded w-5/6"></div>
+              <div className="h-3 bg-gray-300 rounded w-4/6"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="max-w-4xl mx-auto p-4 sm:p-6">
+      <div className="bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+        {/* Tab Headers */}
+        <div className="border-b border-gray-200">
+          <div className="flex">
+            <button
+              onClick={() => setActiveTab("sports")}
+              className={`px-6 py-4 text-sm font-medium rounded-tl-lg transition-colors duration-200 ${
+                activeTab === "sports"
+                  ? "bg-white text-gray-900 border-b-2 border-orange-500"
+                  : "bg-gray-100 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+              }`}
+            >
+              Sports Notice
+            </button>
+            <button
+              onClick={() => setActiveTab("olympiad")}
+              className={`px-6 py-4 text-sm font-medium transition-colors duration-200 ${
+                activeTab === "olympiad"
+                  ? "bg-white text-gray-900 border-b-2 border-orange-500"
+                  : "bg-gray-100 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+              }`}
+            >
+              Olympiad Notice
+            </button>
+          </div>
+        </div>
+
+        {/* Content Area */}
+        <div className="bg-white rounded-b-lg">
+          {activeTab === "sports" ? (
+            <div className="p-6">
+              <ul className="space-y-4">
+                {sportsNotices.map((notice) => (
+                  <li key={notice.id} className="flex items-start">
+                    <span className="inline-block w-2 h-2 bg-orange-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    <button
+                      onClick={() => handleNoticeClick(notice)}
+                      className="text-left text-gray-800 hover:text-orange-600 transition-colors duration-200 leading-relaxed text-sm sm:text-base"
+                    >
+                      {notice.title}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <div className="p-6">
+              <ul className="space-y-4">
+                {olympiadNotices.map((notice) => (
+                  <li key={notice.id} className="flex items-start">
+                    <span className="inline-block w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    <button
+                      onClick={() => handleNoticeClick(notice)}
+                      className="text-left text-gray-800 hover:text-purple-600 transition-colors duration-200 leading-relaxed text-sm sm:text-base"
+                    >
+                      {notice.title}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* View More Button */}
+          <div className="px-6 pb-6">
+            <button
+              onClick={handleViewMore}
+              className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-md text-sm font-medium transition-colors duration-200 shadow-sm hover:shadow-md"
+            >
+              View More
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 // Testimonials Carousel Component
 function TestimonialsCarousel() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   const testimonials = [
     {
-      name: "Priya Sharma",
-      school: "Delhi Public School",
+      name: "Pratyush krishna",
+      school: "De Public School",
       text: "Participating in School of the Year was life-changing! The academic challenges pushed me to excel, and I won a scholarship that's helping fund my engineering studies.",
       rating: 5,
     },
     {
-      name: "Arjun Patel",
+      name: "Arjun Eppli",
       school: "St. Xavier's High School",
       text: "The sports competitions were incredibly well-organized. I made friends from different schools and learned the true spirit of healthy competition.",
       rating: 5,
     },
     {
-      name: "Sneha Reddy",
+      name: "Prayag Kumar",
       school: "Kendriya Vidyalaya",
       text: "The essay writing competition helped me discover my passion for literature. The exposure and recognition I received was beyond my expectations.",
       rating: 5,
@@ -685,6 +932,7 @@ export default function HomePage() {
         `}</style>
       </section>
 
+      <SportsOlympiadNotices />
       {/* Image Carousel Section */}
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
@@ -897,16 +1145,13 @@ export default function HomePage() {
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4" />
-              <span>Registration closes: October 20, 2024</span>
+              <span>Registration closes: October 10, 2025</span>
             </div>
             <div className="flex items-center gap-2">
               <MapPin className="h-4 w-4" />
               <span>Multiple venues across India</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4" />
-              <span>Event duration: 2 days</span>
-            </div>
+            
           </div>
         </div>
       </section>

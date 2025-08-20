@@ -21,7 +21,8 @@ import Image from "next/image";
 const navigationItems = [
   { name: "Home", href: "/" },
   { name: "Schools", href: "/schools" },
-  { name: "Events", href: "/events" },
+  { name: "Olympiad", href: "/Olympiad" },
+  { name: "Sports", href: "/sports" },
   { name: "Books", href: "/books" },
   // { name: "Leaderboard", href: "/leaderboard" },
   { name: "Contact", href: "/contact" },

@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: "Interschool Olympiad and Sports Federation (IOSF)",
     description:
       "The ultimate inter-school academic and sports competition with scholarships and prizes.",
-    url: "https://schooloftheyear.com",
+    url: "https://interschoolosf.com",
     siteName: "School of the Year",
     images: [
       {

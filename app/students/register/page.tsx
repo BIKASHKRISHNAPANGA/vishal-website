@@ -1,20 +1,12 @@
-"use client"
+"use client";
 
-import type React from "react"
-
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
-import { useToast } from "@/hooks/use-toast"
+import type React from "react";
 import {
+  Phone,
+  Home,
+  MapPin,
+  Book,
+  Key,
   User,
   Mail,
   Calendar,
@@ -26,18 +18,71 @@ import {
   AlertCircle,
   GraduationCap,
   Trophy,
-} from "lucide-react"
+} from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
+import { useToast } from "@/hooks/use-toast";
 
-interface StudentFormData {
-  name: string
-  email: string
-  age: string
-  class: string
-  schoolName: string
-  profilePhoto: File | null
-  academicEvents: string[]
-  sportsEvents: string[]
-  agreeTerms: boolean
+export interface StudentFormData {
+  // Personal Information
+  name: string;
+  standard: string;
+  gender: string;
+  dob: string;
+  aadhar: string;
+
+  // Parent/Guardian Information
+  fatherName: string;
+  fatherPhone: string;
+  motherName: string;
+  motherPhone: string;
+
+  // Address Information
+  permanentAddress: string;
+  temporaryAddress: string;
+  sameAsPermanent: boolean;
+  city: string;
+  state: string;
+  pincode: string;
+
+  // Contact Information
+  primaryPhone: string;
+  alternatePhone: string;
+  email: string;
+  otp: string;
+  isEmailVerified: boolean;
+
+  // School Information
+  schoolName: string;
+  schoolAddress: string;
+  schoolCity: string;
+  schoolState: string;
+
+  // Profile Photo
+  profilePhoto: File | null;
+
+  // Event Selection
+  academicEvents: string[];
+  sportsEvents: string[];
+
+  // Terms agreement
+  agreeTerms: boolean;
 }
 
 const academicEvents = [
@@ -46,13 +91,13 @@ const academicEvents = [
   { id: "gk", name: "General Knowledge", fee: 299 },
   { id: "reasoning", name: "Logical Reasoning", fee: 299 },
   { id: "essay", name: "Essay Writing", fee: 299 },
-]
+];
 
 const sportsEvents = [
   { id: "cricket", name: "Cricket (T-19)", fee: 295, type: "team" },
   { id: "football", name: "Football", fee: 295, type: "team" },
   { id: "kandali", name: "Kandali", fee: 293, type: "team" },
-  { id: "kiakho", name: "Kia-kho", fee: 293, type: "team" },
+  { id: "kiakho", name: "Kho-kho", fee: 293, type: "team" },
   { id: "relay", name: "150m Relay Race", fee: 294, type: "team" },
   { id: "100m", name: "100m Track", fee: 299, type: "individual" },
   { id: "200m", name: "200m Track", fee: 299, type: "individual" },
@@ -63,7 +108,7 @@ const sportsEvents = [
   { id: "shotput", name: "Shot Put", fee: 299, type: "individual" },
   { id: "chess", name: "Chess", fee: 299, type: "individual" },
   { id: "badminton", name: "Badminton", fee: 299, type: "individual" },
-]
+];
 
 const schools = [
   "Delhi Public School",
@@ -75,104 +120,170 @@ const schools = [
   "Bal Bharati Public School",
   "Sardar Patel Vidyalaya",
   "Other",
-]
+];
 
 export default function StudentRegisterPage() {
-  const { toast } = useToast()
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [showPayment, setShowPayment] = useState(false)
-  const [totalFee, setTotalFee] = useState(0)
-  const [category, setCategory] = useState("")
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
+  const [totalFee, setTotalFee] = useState(0);
+  const [category, setCategory] = useState("");
+  const [isOtpSent, setIsOtpSent] = useState(false);
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
 
   const [formData, setFormData] = useState<StudentFormData>({
+    // Personal Information
     name: "",
+    standard: "",
+    gender: "",
+    dob: "",
+    aadhar: "",
+
+    // Parent/Guardian Information
+    fatherName: "",
+    fatherPhone: "",
+    motherName: "",
+    motherPhone: "",
+
+    // Address Information
+    permanentAddress: "",
+    temporaryAddress: "",
+    sameAsPermanent: false,
+    city: "",
+    state: "",
+    pincode: "",
+
+    // Contact Information
+    primaryPhone: "",
+    alternatePhone: "",
     email: "",
-    age: "",
-    class: "",
+    otp: "",
+    isEmailVerified: false,
+
+    // School Information
     schoolName: "",
+    schoolAddress: "",
+    schoolCity: "",
+    schoolState: "",
+
+    // Profile Photo
     profilePhoto: null,
+
+    // Event Selection
     academicEvents: [],
     sportsEvents: [],
+
+    // Terms agreement
     agreeTerms: false,
-  })
+  });
 
   // Calculate category based on class
   useEffect(() => {
-    const classNum = Number.parseInt(formData.class)
+    const classNum = Number.parseInt(formData.standard);
     if (classNum >= 5 && classNum <= 6) {
-      setCategory("Category 1 (5th-6th)")
+      setCategory("Category 1 (5th-6th)");
     } else if (classNum >= 7 && classNum <= 8) {
-      setCategory("Category 2 (7th-8th)")
+      setCategory("Category 2 (7th-8th)");
     } else if (classNum >= 9 && classNum <= 10) {
-      setCategory("Category 3 (9th-10th)")
+      setCategory("Category 3 (9th-10th)");
     } else {
-      setCategory("")
+      setCategory("");
     }
-  }, [formData.class])
+  }, [formData.standard]);
 
   // Calculate total fee
   useEffect(() => {
-    let total = 0
+    let total = 0;
 
     // Academic events
-    formData.academicEvents.forEach((eventId) => {
-      const event = academicEvents.find((e) => e.id === eventId)
-      if (event) total += event.fee
-    })
+    formData.academicEvents.forEach((eventId: string) => {
+      const event = academicEvents.find((e) => e.id === eventId);
+      if (event) total += event.fee;
+    });
 
     // Sports events
-    formData.sportsEvents.forEach((eventId) => {
-      const event = sportsEvents.find((e) => e.id === eventId)
-      if (event) total += event.fee
-    })
+    formData.sportsEvents.forEach((eventId: string) => {
+      const event = sportsEvents.find((e) => e.id === eventId);
+      if (event) total += event.fee;
+    });
 
-    setTotalFee(total)
-  }, [formData.academicEvents, formData.sportsEvents])
+    setTotalFee(total);
+  }, [formData.academicEvents, formData.sportsEvents]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-  const handleSelectChange = (name: keyof StudentFormData) => (value: string) => {
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleSelectChange =
+    (name: keyof StudentFormData) => (value: string) => {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null
-    setFormData((prev) => ({ ...prev, profilePhoto: file }))
-  }
-
-  const handleEventChange = (eventType: "academicEvents" | "sportsEvents", eventId: string) => (checked: boolean) => {
+  const handleSameAddressChange = (checked: boolean) => {
     setFormData((prev) => ({
       ...prev,
-      [eventType]: checked ? [...prev[eventType], eventId] : prev[eventType].filter((id) => id !== eventId),
-    }))
-  }
+      sameAsPermanent: checked,
+      temporaryAddress: checked ? prev.permanentAddress : prev.temporaryAddress,
+    }));
+  };
 
-  const handleCheckboxChange = (name: keyof StudentFormData) => (checked: boolean) => {
-    setFormData((prev) => ({ ...prev, [name]: checked }))
-  }
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    setFormData((prev) => ({ ...prev, profilePhoto: file }));
+  };
+
+  const handleEventChange =
+    (eventType: "academicEvents" | "sportsEvents", eventId: string) =>
+    (checked: boolean) => {
+      setFormData((prev) => ({
+        ...prev,
+        [eventType]: checked
+          ? [...prev[eventType], eventId]
+          : prev[eventType].filter((id) => id !== eventId),
+      }));
+    };
+
+  const handleCheckboxChange =
+    (name: keyof StudentFormData) => (checked: boolean) => {
+      setFormData((prev) => ({ ...prev, [name]: checked }));
+    };
+
+  const handleSendOtp = async () => {
+    // Implement OTP sending logic here
+    setIsOtpSent(true);
+  };
+
+  const handleVerifyOtp = async () => {
+    // Implement OTP verification logic here
+    setIsEmailVerified(true);
+    setFormData((prev) => ({ ...prev, isEmailVerified: true }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!formData.agreeTerms) {
       toast({
         title: "Terms Required",
         description: "Please agree to the terms and conditions to proceed.",
         variant: "destructive",
-      })
-      return
+      });
+      return;
     }
 
-    if (formData.academicEvents.length === 0 && formData.sportsEvents.length === 0) {
+    if (
+      formData.academicEvents.length === 0 &&
+      formData.sportsEvents.length === 0
+    ) {
       toast({
         title: "Events Required",
         description: "Please select at least one event to participate in.",
         variant: "destructive",
-      })
-      return
+      });
+      return;
     }
 
     if (totalFee === 0) {
@@ -180,72 +291,93 @@ export default function StudentRegisterPage() {
         title: "No Events Selected",
         description: "Please select events to calculate registration fee.",
         variant: "destructive",
-      })
-      return
+      });
+      return;
     }
 
-    setShowPayment(true)
-  }
+    setShowPayment(true);
+  };
 
   const handlePayment = async () => {
-    setIsSubmitting(true)
+    setIsSubmitting(true);
 
     try {
       // Create FormData for file upload
-      const submitData = new FormData()
+      const submitData = new FormData();
       Object.entries(formData).forEach(([key, value]) => {
         if (key === "profilePhoto" && value instanceof File) {
-          submitData.append(key, value)
+          submitData.append(key, value);
         } else if (Array.isArray(value)) {
-          submitData.append(key, JSON.stringify(value))
+          submitData.append(key, JSON.stringify(value));
         } else if (typeof value === "boolean") {
-          submitData.append(key, value.toString())
+          submitData.append(key, value.toString());
         } else if (typeof value === "string") {
-          submitData.append(key, value)
+          submitData.append(key, value);
         }
-      })
+      });
 
-      submitData.append("totalFee", totalFee.toString())
-      submitData.append("category", category)
+      submitData.append("totalFee", totalFee.toString());
+      submitData.append("category", category);
 
       const response = await fetch("/api/students/register", {
         method: "POST",
         body: submitData,
-      })
+      });
 
       if (response.ok) {
-        const result = await response.json()
+        const result = await response.json();
         toast({
           title: "Registration Successful!",
-          description: "Your registration is complete. Check your email for confirmation and QR code.",
-        })
+          description:
+            "Your registration is complete. Check your email for confirmation and QR code.",
+        });
 
         // Reset form
         setFormData({
           name: "",
+          standard: "",
+          gender: "",
+          dob: "",
+          aadhar: "",
+          fatherName: "",
+          fatherPhone: "",
+          motherName: "",
+          motherPhone: "",
+          permanentAddress: "",
+          temporaryAddress: "",
+          sameAsPermanent: false,
+          city: "",
+          state: "",
+          pincode: "",
+          primaryPhone: "",
+          alternatePhone: "",
           email: "",
-          age: "",
-          class: "",
+          otp: "",
+          isEmailVerified: false,
           schoolName: "",
+          schoolAddress: "",
+          schoolCity: "",
+          schoolState: "",
           profilePhoto: null,
           academicEvents: [],
           sportsEvents: [],
           agreeTerms: false,
-        })
-        setShowPayment(false)
+        });
+        setShowPayment(false);
       } else {
-        throw new Error("Registration failed")
+        throw new Error("Registration failed");
       }
     } catch (error) {
       toast({
         title: "Registration Failed",
-        description: "There was an error processing your registration. Please try again.",
+        description:
+          "There was an error processing your registration. Please try again.",
         variant: "destructive",
-      })
+      });
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   if (showPayment) {
     return (
@@ -264,13 +396,15 @@ export default function StudentRegisterPage() {
                 <CardContent className="p-6 space-y-6">
                   {/* Student Details */}
                   <div className="space-y-2">
-                    <h3 className="font-semibold text-lg">Student Information</h3>
+                    <h3 className="font-semibold text-lg">
+                      Student Information
+                    </h3>
                     <div className="bg-muted/30 p-4 rounded-lg space-y-2 text-sm">
                       <p>
                         <strong>Name:</strong> {formData.name}
                       </p>
                       <p>
-                        <strong>Class:</strong> {formData.class} ({category})
+                        <strong>Class:</strong> {formData.standard} ({category})
                       </p>
                       <p>
                         <strong>School:</strong> {formData.schoolName}
@@ -287,16 +421,23 @@ export default function StudentRegisterPage() {
                     <div className="space-y-3">
                       {formData.academicEvents.length > 0 && (
                         <div>
-                          <h4 className="font-medium text-[var(--color-royal-blue)] mb-2">Academic Events</h4>
+                          <h4 className="font-medium text-[var(--color-royal-blue)] mb-2">
+                            Academic Events
+                          </h4>
                           <div className="space-y-1">
-                            {formData.academicEvents.map((eventId) => {
-                              const event = academicEvents.find((e) => e.id === eventId)
+                            {formData.academicEvents.map((eventId: string) => {
+                              const event = academicEvents.find(
+                                (e) => e.id === eventId
+                              );
                               return (
-                                <div key={eventId} className="flex justify-between text-sm">
+                                <div
+                                  key={eventId}
+                                  className="flex justify-between text-sm"
+                                >
                                   <span>{event?.name}</span>
                                   <span>₹{event?.fee}</span>
                                 </div>
-                              )
+                              );
                             })}
                           </div>
                         </div>
@@ -304,21 +445,31 @@ export default function StudentRegisterPage() {
 
                       {formData.sportsEvents.length > 0 && (
                         <div>
-                          <h4 className="font-medium text-[var(--color-gold)] mb-2">Sports Events</h4>
+                          <h4 className="font-medium text-[var(--color-gold)] mb-2">
+                            Sports Events
+                          </h4>
                           <div className="space-y-1">
-                            {formData.sportsEvents.map((eventId) => {
-                              const event = sportsEvents.find((e) => e.id === eventId)
+                            {formData.sportsEvents.map((eventId: string) => {
+                              const event = sportsEvents.find(
+                                (e) => e.id === eventId
+                              );
                               return (
-                                <div key={eventId} className="flex justify-between text-sm">
+                                <div
+                                  key={eventId}
+                                  className="flex justify-between text-sm"
+                                >
                                   <span>
                                     {event?.name}{" "}
-                                    <Badge variant="outline" className="ml-1 text-xs">
+                                    <Badge
+                                      variant="outline"
+                                      className="ml-1 text-xs"
+                                    >
                                       {event?.type}
                                     </Badge>
                                   </span>
                                   <span>₹{event?.fee}</span>
                                 </div>
-                              )
+                              );
                             })}
                           </div>
                         </div>
@@ -331,7 +482,9 @@ export default function StudentRegisterPage() {
                   {/* Total Fee */}
                   <div className="flex justify-between items-center text-lg font-bold">
                     <span>Total Registration Fee:</span>
-                    <span className="text-[var(--color-royal-blue)]">₹{totalFee}</span>
+                    <span className="text-[var(--color-royal-blue)]">
+                      ₹{totalFee}
+                    </span>
                   </div>
 
                   {/* Payment Buttons */}
@@ -342,7 +495,9 @@ export default function StudentRegisterPage() {
                       className="w-full bg-[var(--color-royal-blue)] hover:bg-[var(--color-royal-blue)]/90 btn-hover-lift text-lg py-3"
                       size="lg"
                     >
-                      {isSubmitting ? "Processing Payment..." : `Pay ₹${totalFee} & Register`}
+                      {isSubmitting
+                        ? "Processing Payment..."
+                        : `Pay ₹${totalFee} & Register`}
                     </Button>
 
                     <Button
@@ -357,7 +512,10 @@ export default function StudentRegisterPage() {
 
                   <div className="text-center text-xs text-muted-foreground">
                     <p>Secure payment powered by Razorpay</p>
-                    <p>You will receive confirmation email with QR code after successful payment</p>
+                    <p>
+                      You will receive confirmation email with QR code after
+                      successful payment
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -366,7 +524,7 @@ export default function StudentRegisterPage() {
         </section>
         <Footer />
       </div>
-    )
+    );
   }
 
   return (
@@ -380,9 +538,12 @@ export default function StudentRegisterPage() {
             <Badge className="bg-[var(--color-gold)] text-black hover:bg-[var(--color-gold)]/90 text-sm px-4 py-2">
               Student Registration
             </Badge>
-            <h1 className="font-serif text-3xl md:text-5xl font-bold">Register as Student</h1>
+            <h1 className="font-serif text-3xl md:text-5xl font-bold">
+              Register as Student
+            </h1>
             <p className="text-blue-100 text-lg max-w-2xl mx-auto">
-              Join the most prestigious inter-school championship and compete for scholarships and recognition
+              Join the most prestigious inter-school championship and compete
+              for scholarships and recognition
             </p>
           </div>
         </div>
@@ -405,110 +566,552 @@ export default function StudentRegisterPage() {
                   </CardHeader>
                   <CardContent className="p-6">
                     <form onSubmit={handleSubmit} className="space-y-6">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {/* Personal Information Section */}
+                      <div className="space-y-4">
+                        <h3 className="text-lg font-semibold">
+                          Personal Information
+                        </h3>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label
+                              htmlFor="name"
+                              className="flex items-center space-x-2"
+                            >
+                              <User className="h-4 w-4" />
+                              <span>Full Name *</span>
+                            </Label>
+                            <Input
+                              id="name"
+                              name="name"
+                              value={formData.name}
+                              onChange={handleInputChange}
+                              placeholder="Enter your full name"
+                              required
+                              className="focus:ring-[var(--color-royal-blue)]"
+                            />
+                          </div>
+
+                          <div className="space-y-2">
+                            <Label
+                              htmlFor="standard"
+                              className="flex items-center space-x-2"
+                            >
+                              <Book className="h-4 w-4" />
+                              <span>Standard *</span>
+                            </Label>
+                            <Select
+                              onValueChange={handleSelectChange("standard")}
+                              required
+                            >
+                              <SelectTrigger className="focus:ring-[var(--color-royal-blue)]">
+                                <SelectValue placeholder="Select standard" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {[5, 6, 7, 8, 9, 10].map((std) => (
+                                  <SelectItem key={std} value={std.toString()}>
+                                    {std}th Standard
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label
+                              htmlFor="gender"
+                              className="flex items-center space-x-2"
+                            >
+                              <User className="h-4 w-4" />
+                              <span>Gender *</span>
+                            </Label>
+                            <Select
+                              onValueChange={handleSelectChange("gender")}
+                              required
+                            >
+                              <SelectTrigger className="focus:ring-[var(--color-royal-blue)]">
+                                <SelectValue placeholder="Select gender" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="male">Male</SelectItem>
+                                <SelectItem value="female">Female</SelectItem>
+                                <SelectItem value="other">Other</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+
+                          <div className="space-y-2">
+                            <Label
+                              htmlFor="dob"
+                              className="flex items-center space-x-2"
+                            >
+                              <Calendar className="h-4 w-4" />
+                              <span>Date of Birth *</span>
+                            </Label>
+                            <Input
+                              id="dob"
+                              name="dob"
+                              type="date"
+                              value={formData.dob}
+                              onChange={handleInputChange}
+                              required
+                              className="focus:ring-[var(--color-royal-blue)]"
+                            />
+                          </div>
+                        </div>
+
                         <div className="space-y-2">
-                          <Label htmlFor="name" className="flex items-center space-x-2">
-                            <User className="h-4 w-4" />
-                            <span>Full Name *</span>
+                          <Label
+                            htmlFor="aadhar"
+                            className="flex items-center space-x-2"
+                          >
+                            <CreditCard className="h-4 w-4" />
+                            <span>Aadhar Number *</span>
                           </Label>
                           <Input
-                            id="name"
-                            name="name"
-                            value={formData.name}
+                            id="aadhar"
+                            name="aadhar"
+                            value={formData.aadhar}
                             onChange={handleInputChange}
-                            placeholder="Enter your full name"
+                            placeholder="Enter 12-digit Aadhar number"
+                            pattern="[0-9]{12}"
+                            maxLength={12}
                             required
                             className="focus:ring-[var(--color-royal-blue)]"
                           />
                         </div>
+                      </div>
+
+                      {/* Parent/Guardian Information Section */}
+                      <div className="space-y-4">
+                        <h3 className="text-lg font-semibold">
+                          Parent/Guardian Information
+                        </h3>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label
+                              htmlFor="fatherName"
+                              className="flex items-center space-x-2"
+                            >
+                              <User className="h-4 w-4" />
+                              <span>Father's Name</span>
+                            </Label>
+                            <Input
+                              id="fatherName"
+                              name="fatherName"
+                              value={formData.fatherName}
+                              onChange={handleInputChange}
+                              placeholder="Enter father's name"
+                              className="focus:ring-[var(--color-royal-blue)]"
+                            />
+                          </div>
+
+                          <div className="space-y-2">
+                            <Label
+                              htmlFor="fatherPhone"
+                              className="flex items-center space-x-2"
+                            >
+                              <Phone className="h-4 w-4" />
+                              <span>Father's Phone Number</span>
+                            </Label>
+                            <Input
+                              id="fatherPhone"
+                              name="fatherPhone"
+                              type="tel"
+                              value={formData.fatherPhone}
+                              onChange={handleInputChange}
+                              placeholder="Enter father's phone number"
+                              pattern="[0-9]{10}"
+                              maxLength={10}
+                              className="focus:ring-[var(--color-royal-blue)]"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label
+                              htmlFor="motherName"
+                              className="flex items-center space-x-2"
+                            >
+                              <User className="h-4 w-4" />
+                              <span>Mother's Name</span>
+                            </Label>
+                            <Input
+                              id="motherName"
+                              name="motherName"
+                              value={formData.motherName}
+                              onChange={handleInputChange}
+                              placeholder="Enter mother's name"
+                              className="focus:ring-[var(--color-royal-blue)]"
+                            />
+                          </div>
+
+                          <div className="space-y-2">
+                            <Label
+                              htmlFor="motherPhone"
+                              className="flex items-center space-x-2"
+                            >
+                              <Phone className="h-4 w-4" />
+                              <span>Mother's Phone Number *</span>
+                            </Label>
+                            <Input
+                              id="motherPhone"
+                              name="motherPhone"
+                              type="tel"
+                              value={formData.motherPhone}
+                              onChange={handleInputChange}
+                              placeholder="Enter mother's phone number"
+                              pattern="[0-9]{10}"
+                              maxLength={10}
+                              required
+                              className="focus:ring-[var(--color-royal-blue)]"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Address Information Section */}
+                      <div className="space-y-4">
+                        <h3 className="text-lg font-semibold">
+                          Address Information
+                        </h3>
 
                         <div className="space-y-2">
-                          <Label htmlFor="email" className="flex items-center space-x-2">
+                          <Label
+                            htmlFor="permanentAddress"
+                            className="flex items-center space-x-2"
+                          >
+                            <Home className="h-4 w-4" />
+                            <span>Permanent Address *</span>
+                          </Label>
+                          <Textarea
+                            id="permanentAddress"
+                            name="permanentAddress"
+                            value={formData.permanentAddress}
+                            onChange={handleInputChange}
+                            placeholder="Enter your permanent address"
+                            required
+                            className="focus:ring-[var(--color-royal-blue)] min-h-[80px]"
+                          />
+                        </div>
+
+                        <div className="flex items-center space-x-2">
+                          <Checkbox
+                            id="sameAsPermanent"
+                            checked={formData.sameAsPermanent}
+                            onCheckedChange={handleSameAddressChange}
+                          />
+                          <Label htmlFor="sameAsPermanent">
+                            Same as permanent address
+                          </Label>
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label
+                            htmlFor="temporaryAddress"
+                            className="flex items-center space-x-2"
+                          >
+                            <Home className="h-4 w-4" />
+                            <span>Temporary Address *</span>
+                          </Label>
+                          <Textarea
+                            id="temporaryAddress"
+                            name="temporaryAddress"
+                            value={formData.temporaryAddress}
+                            onChange={handleInputChange}
+                            placeholder="Enter your temporary address"
+                            required
+                            disabled={formData.sameAsPermanent}
+                            className="focus:ring-[var(--color-royal-blue)] min-h-[80px]"
+                          />
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          <div className="space-y-2">
+                            <Label
+                              htmlFor="city"
+                              className="flex items-center space-x-2"
+                            >
+                              <MapPin className="h-4 w-4" />
+                              <span>City *</span>
+                            </Label>
+                            <Input
+                              id="city"
+                              name="city"
+                              value={formData.city}
+                              onChange={handleInputChange}
+                              placeholder="Enter city"
+                              required
+                              className="focus:ring-[var(--color-royal-blue)]"
+                            />
+                          </div>
+
+                          <div className="space-y-2">
+                            <Label
+                              htmlFor="state"
+                              className="flex items-center space-x-2"
+                            >
+                              <MapPin className="h-4 w-4" />
+                              <span>State *</span>
+                            </Label>
+                            <Select
+                              onValueChange={handleSelectChange("state")}
+                              required
+                            >
+                              <SelectTrigger className="focus:ring-[var(--color-royal-blue)]">
+                                <SelectValue placeholder="Select state" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="andhra-pradesh">
+                                  Andhra Pradesh
+                                </SelectItem>
+                                <SelectItem value="karnataka">
+                                  Karnataka
+                                </SelectItem>
+                                <SelectItem value="tamil-nadu">
+                                  Tamil Nadu
+                                </SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+
+                          <div className="space-y-2">
+                            <Label
+                              htmlFor="pincode"
+                              className="flex items-center space-x-2"
+                            >
+                              <MapPin className="h-4 w-4" />
+                              <span>Pincode *</span>
+                            </Label>
+                            <Input
+                              id="pincode"
+                              name="pincode"
+                              value={formData.pincode}
+                              onChange={handleInputChange}
+                              placeholder="Enter pincode"
+                              pattern="[0-9]{6}"
+                              maxLength={6}
+                              required
+                              className="focus:ring-[var(--color-royal-blue)]"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Contact Information Section */}
+                      <div className="space-y-4">
+                        <h3 className="text-lg font-semibold">
+                          Contact Information
+                        </h3>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label
+                              htmlFor="primaryPhone"
+                              className="flex items-center space-x-2"
+                            >
+                              <Phone className="h-4 w-4" />
+                              <span>Primary Phone *</span>
+                            </Label>
+                            <Input
+                              id="primaryPhone"
+                              name="primaryPhone"
+                              type="tel"
+                              value={formData.primaryPhone}
+                              onChange={handleInputChange}
+                              placeholder="Enter primary phone number"
+                              pattern="[0-9]{10}"
+                              maxLength={10}
+                              required
+                              className="focus:ring-[var(--color-royal-blue)]"
+                            />
+                          </div>
+
+                          <div className="space-y-2">
+                            <Label
+                              htmlFor="alternatePhone"
+                              className="flex items-center space-x-2"
+                            >
+                              <Phone className="h-4 w-4" />
+                              <span>Alternate Phone</span>
+                            </Label>
+                            <Input
+                              id="alternatePhone"
+                              name="alternatePhone"
+                              type="tel"
+                              value={formData.alternatePhone}
+                              onChange={handleInputChange}
+                              placeholder="Enter alternate phone number"
+                              pattern="[0-9]{10}"
+                              maxLength={10}
+                              className="focus:ring-[var(--color-royal-blue)]"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label
+                            htmlFor="email"
+                            className="flex items-center space-x-2"
+                          >
                             <Mail className="h-4 w-4" />
                             <span>Email Address *</span>
                           </Label>
-                          <Input
-                            id="email"
-                            name="email"
-                            type="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            placeholder="your.email@example.com"
+                          <div className="flex gap-2">
+                            <Input
+                              id="email"
+                              name="email"
+                              type="email"
+                              value={formData.email}
+                              onChange={handleInputChange}
+                              placeholder="your.email@example.com"
+                              required
+                              className="focus:ring-[var(--color-royal-blue)]"
+                            />
+                            <Button
+                              type="button"
+                              onClick={handleSendOtp}
+                              disabled={isOtpSent}
+                              variant="outline"
+                            >
+                              {isOtpSent ? "OTP Sent" : "Send OTP"}
+                            </Button>
+                          </div>
+                        </div>
+
+                        {isOtpSent && (
+                          <div className="space-y-2">
+                            <Label
+                              htmlFor="otp"
+                              className="flex items-center space-x-2"
+                            >
+                              <Key className="h-4 w-4" />
+                              <span>Enter OTP *</span>
+                            </Label>
+                            <div className="flex gap-2">
+                              <Input
+                                id="otp"
+                                name="otp"
+                                value={formData.otp}
+                                onChange={handleInputChange}
+                                placeholder="Enter OTP"
+                                required
+                                className="focus:ring-[var(--color-royal-blue)]"
+                              />
+                              <Button
+                                type="button"
+                                onClick={handleVerifyOtp}
+                                variant="outline"
+                              >
+                                Verify OTP
+                              </Button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* School Information Section */}
+                      <div className="space-y-4">
+                        <h3 className="text-lg font-semibold">
+                          School Information
+                        </h3>
+
+                        <div className="space-y-2">
+                          <Label
+                            htmlFor="schoolName"
+                            className="flex items-center space-x-2"
+                          >
+                            <School className="h-4 w-4" />
+                            <span>School Name *</span>
+                          </Label>
+                          <input
+                            type="text"
                             required
-                            className="focus:ring-[var(--color-royal-blue)]"
+                            placeholder="Enter your school"
+                            onChange={(e) =>
+                              handleSelectChange("schoolName")(e.target.value)
+                            }
+                            className="w-full rounded-md border bg-gray-100 px-3 py-2 text-sm shadow-sm focus:border-[var(--color-royal-blue)] focus:ring-[var(--color-royal-blue)]"
                           />
                         </div>
-                      </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div className="space-y-2">
-                          <Label htmlFor="age" className="flex items-center space-x-2">
-                            <Calendar className="h-4 w-4" />
-                            <span>Age *</span>
+                          <Label
+                            htmlFor="schoolAddress"
+                            className="flex items-center space-x-2"
+                          >
+                            <Home className="h-4 w-4" />
+                            <span>School Address *</span>
                           </Label>
-                          <Input
-                            id="age"
-                            name="age"
-                            type="number"
-                            min="10"
-                            max="18"
-                            value={formData.age}
+                          <Textarea
+                            id="schoolAddress"
+                            name="schoolAddress"
+                            value={formData.schoolAddress}
                             onChange={handleInputChange}
-                            placeholder="Age"
+                            placeholder="Enter school address"
                             required
-                            className="focus:ring-[var(--color-royal-blue)]"
+                            className="focus:ring-[var(--color-royal-blue)] min-h-[80px]"
                           />
                         </div>
 
-                        <div className="space-y-2">
-                          <Label htmlFor="class" className="flex items-center space-x-2">
-                            <GraduationCap className="h-4 w-4" />
-                            <span>Class *</span>
-                          </Label>
-                          <Select onValueChange={handleSelectChange("class")} required>
-                            <SelectTrigger className="focus:ring-[var(--color-royal-blue)]">
-                              <SelectValue placeholder="Select class" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {[5, 6, 7, 8, 9, 10].map((cls) => (
-                                <SelectItem key={cls} value={cls.toString()}>
-                                  {cls}th Grade
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label
+                              htmlFor="schoolCity"
+                              className="flex items-center space-x-2"
+                            >
+                              <MapPin className="h-4 w-4" />
+                              <span>School City *</span>
+                            </Label>
+                            <Input
+                              id="schoolCity"
+                              name="schoolCity"
+                              value={formData.schoolCity}
+                              onChange={handleInputChange}
+                              placeholder="Enter school city"
+                              required
+                              className="focus:ring-[var(--color-royal-blue)]"
+                            />
+                          </div>
 
-                        <div className="space-y-2">
-                          <Label className="text-sm font-medium">Category</Label>
-                          <div className="p-2 bg-muted/30 rounded-md text-sm">{category || "Select class first"}</div>
+                          <div className="space-y-2">
+                            <Label
+                              htmlFor="schoolState"
+                              className="flex items-center space-x-2"
+                            >
+                              <MapPin className="h-4 w-4" />
+                              <span>School State *</span>
+                            </Label>
+                            <input
+                              type="text"
+                              required
+                              placeholder="Enter school state"
+                              onChange={(e) =>
+                                handleSelectChange("schoolState")(
+                                  e.target.value
+                                )
+                              }
+                              className="w-full rounded-md border bg-gray-100 px-3 py-2 text-sm shadow-sm focus:border-[var(--color-royal-blue)] focus:ring-[var(--color-royal-blue)]"
+                            />
+                          </div>
                         </div>
                       </div>
 
+                      {/* Profile Photo Section */}
                       <div className="space-y-2">
-                        <Label htmlFor="schoolName" className="flex items-center space-x-2">
-                          <School className="h-4 w-4" />
-                          <span>School Name *</span>
-                        </Label>
-                        <Select onValueChange={handleSelectChange("schoolName")} required>
-                          <SelectTrigger className="focus:ring-[var(--color-royal-blue)]">
-                            <SelectValue placeholder="Select your school" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {schools.map((school) => (
-                              <SelectItem key={school} value={school}>
-                                {school}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="profilePhoto" className="flex items-center space-x-2">
+                        <Label
+                          htmlFor="profilePhoto"
+                          className="flex items-center space-x-2"
+                        >
                           <Upload className="h-4 w-4" />
                           <span>Profile Photo</span>
-                          <span className="text-xs text-muted-foreground">(Optional)</span>
+                          <span className="text-xs text-muted-foreground">
+                            (Optional)
+                          </span>
                         </Label>
                         <Input
                           id="profilePhoto"
@@ -518,8 +1121,17 @@ export default function StudentRegisterPage() {
                           onChange={handleFileChange}
                           className="focus:ring-[var(--color-royal-blue)]"
                         />
-                        <p className="text-xs text-muted-foreground">Upload your photo (PNG, JPG format, max 2MB)</p>
+                        <p className="text-xs text-muted-foreground">
+                          Upload your photo (PNG, JPG format, max 2MB)
+                        </p>
                       </div>
+
+                      <Button
+                        type="submit"
+                        className="w-full bg-[var(--color-royal-blue)] hover:bg-[var(--color-royal-blue-dark)]"
+                      >
+                        Submit Registration
+                      </Button>
                     </form>
                   </CardContent>
                 </Card>
@@ -541,13 +1153,24 @@ export default function StudentRegisterPage() {
                       </h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         {academicEvents.map((event) => (
-                          <div key={event.id} className="flex items-center space-x-3 p-3 border rounded-lg">
+                          <div
+                            key={event.id}
+                            className="flex items-center space-x-3 p-3 border rounded-lg"
+                          >
                             <Checkbox
                               id={event.id}
-                              checked={formData.academicEvents.includes(event.id)}
-                              onCheckedChange={handleEventChange("academicEvents", event.id)}
+                              checked={formData.academicEvents.includes(
+                                event.id
+                              )}
+                              onCheckedChange={handleEventChange(
+                                "academicEvents",
+                                event.id
+                              )}
                             />
-                            <Label htmlFor={event.id} className="flex-1 cursor-pointer">
+                            <Label
+                              htmlFor={event.id}
+                              className="flex-1 cursor-pointer"
+                            >
                               <div className="flex justify-between items-center">
                                 <span>{event.name}</span>
                                 <Badge variant="outline">₹{event.fee}</Badge>
@@ -568,17 +1191,29 @@ export default function StudentRegisterPage() {
                       </h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         {sportsEvents.map((event) => (
-                          <div key={event.id} className="flex items-center space-x-3 p-3 border rounded-lg">
+                          <div
+                            key={event.id}
+                            className="flex items-center space-x-3 p-3 border rounded-lg"
+                          >
                             <Checkbox
                               id={event.id}
                               checked={formData.sportsEvents.includes(event.id)}
-                              onCheckedChange={handleEventChange("sportsEvents", event.id)}
+                              onCheckedChange={handleEventChange(
+                                "sportsEvents",
+                                event.id
+                              )}
                             />
-                            <Label htmlFor={event.id} className="flex-1 cursor-pointer">
+                            <Label
+                              htmlFor={event.id}
+                              className="flex-1 cursor-pointer"
+                            >
                               <div className="flex justify-between items-center">
                                 <div className="flex items-center space-x-2">
                                   <span>{event.name}</span>
-                                  <Badge variant="secondary" className="text-xs">
+                                  <Badge
+                                    variant="secondary"
+                                    className="text-xs"
+                                  >
                                     {event.type}
                                   </Badge>
                                 </div>
@@ -599,13 +1234,22 @@ export default function StudentRegisterPage() {
                           onCheckedChange={handleCheckboxChange("agreeTerms")}
                           className="mt-1"
                         />
-                        <Label htmlFor="agreeTerms" className="text-sm cursor-pointer">
+                        <Label
+                          htmlFor="agreeTerms"
+                          className="text-sm cursor-pointer"
+                        >
                           I agree to the{" "}
-                          <a href="/terms" className="text-[var(--color-royal-blue)] hover:underline">
+                          <a
+                            href="/terms"
+                            className="text-[var(--color-royal-blue)] hover:underline"
+                          >
                             Terms and Conditions
                           </a>{" "}
                           and{" "}
-                          <a href="/privacy" className="text-[var(--color-royal-blue)] hover:underline">
+                          <a
+                            href="/privacy"
+                            className="text-[var(--color-royal-blue)] hover:underline"
+                          >
                             Privacy Policy
                           </a>
                           . I confirm that all information provided is accurate.
@@ -637,31 +1281,45 @@ export default function StudentRegisterPage() {
                   </CardHeader>
                   <CardContent className="p-4 space-y-3">
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-green-600">₹{totalFee}</div>
-                      <p className="text-sm text-muted-foreground">Total Registration Fee</p>
+                      <div className="text-3xl font-bold text-green-600">
+                        ₹{totalFee}
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        Total Registration Fee
+                      </p>
                     </div>
 
                     {totalFee > 0 && (
                       <div className="space-y-2 text-sm">
                         <p className="font-semibold">Selected Events:</p>
                         <div className="space-y-1">
-                          {formData.academicEvents.map((eventId) => {
-                            const event = academicEvents.find((e) => e.id === eventId)
+                          {formData.academicEvents.map((eventId: string) => {
+                            const event = academicEvents.find(
+                              (e) => e.id === eventId
+                            );
                             return (
-                              <div key={eventId} className="flex justify-between">
+                              <div
+                                key={eventId}
+                                className="flex justify-between"
+                              >
                                 <span>{event?.name}</span>
                                 <span>₹{event?.fee}</span>
                               </div>
-                            )
+                            );
                           })}
-                          {formData.sportsEvents.map((eventId) => {
-                            const event = sportsEvents.find((e) => e.id === eventId)
+                          {formData.sportsEvents.map((eventId: string) => {
+                            const event = sportsEvents.find(
+                              (e) => e.id === eventId
+                            );
                             return (
-                              <div key={eventId} className="flex justify-between">
+                              <div
+                                key={eventId}
+                                className="flex justify-between"
+                              >
                                 <span>{event?.name}</span>
                                 <span>₹{event?.fee}</span>
                               </div>
-                            )
+                            );
                           })}
                         </div>
                       </div>
@@ -710,10 +1368,10 @@ export default function StudentRegisterPage() {
                         href="mailto:students@schooloftheyear.com"
                         className="text-[var(--color-royal-blue)] hover:underline"
                       >
-                        students@schooloftheyear.com
+                        info@interschoolosf.in
                       </a>
                     </p>
-                    <p>Phone: +91 98765 43210</p>
+                    <p>Phone: +91 93265 84482</p>
                   </CardContent>
                 </Card>
               </div>
@@ -724,5 +1382,5 @@ export default function StudentRegisterPage() {
 
       <Footer />
     </div>
-  )
+  );
 }

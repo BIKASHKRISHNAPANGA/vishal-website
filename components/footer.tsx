@@ -1,11 +1,22 @@
-import Link from "next/link"
-import { Trophy, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube } from "lucide-react"
+"use client";
+
+import Link from "next/link";
+import {
+  Trophy,
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Instagram,
+  Youtube,
+} from "lucide-react";
 import Image from "next/image";
 
 export function Footer() {
-   const openLink = (url: string) => {
-     window.open(url, "_blank", "noopener,noreferrer");
-   };
+  const openLink = (url: string) => {
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
   return (
     <footer className="bg-[var(--color-royal-blue)] text-white">
       <div className="container mx-auto px-4 py-12">
@@ -32,38 +43,54 @@ export function Footer() {
               The ultimate inter-school Olympiad and sports championship.
               Empowering students through healthy competition and excellence.
             </p>
-           
 
-<div className="flex space-x-4">
-  <button
-    onClick={() => openLink("https://www.facebook.com/profile.php?id=61579305553432")}
-    className="text-blue-200 hover:text-[var(--color-gold)] transition-colors"
-  >
-    <Facebook className="h-5 w-5" />
-  </button>
+            <div className="flex space-x-4">
+              <button
+                onClick={() =>
+                  openLink(
+                    "https://www.facebook.com/profile.php?id=61579305553432"
+                  )
+                }
+                className="text-blue-200 hover:text-[var(--color-gold)] transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook className="h-5 w-5" />
+              </button>
 
-  <button
-    onClick={() => openLink("https://x.com/Interschool_OSF?t=KdMXeLtrrB3BHg2COtzr3w&s=09")}
-    className="text-blue-200 hover:text-[var(--color-gold)] transition-colors"
-  >
-    <Twitter className="h-5 w-5" />
-  </button>
+              <button
+                onClick={() =>
+                  openLink(
+                    "https://x.com/Interschool_OSF?t=KdMXeLtrrB3BHg2COtzr3w&s=09"
+                  )
+                }
+                className="text-blue-200 hover:text-[var(--color-gold)] transition-colors"
+                aria-label="Twitter"
+              >
+                <Twitter className="h-5 w-5" />
+              </button>
 
-  <button
-    onClick={() => openLink("https://www.instagram.com/interschoolosf?igsh=MWF5ZGRldXlraTh5ZQ==")}
-    className="text-blue-200 hover:text-[var(--color-gold)] transition-colors"
-  >
-    <Instagram className="h-5 w-5" />
-  </button>
+              <button
+                onClick={() =>
+                  openLink(
+                    "https://www.instagram.com/interschoolosf?igsh=MWF5ZGRldXlraTh5ZQ=="
+                  )
+                }
+                className="text-blue-200 hover:text-[var(--color-gold)] transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="h-5 w-5" />
+              </button>
 
-  <button
-    onClick={() => openLink("https://www.youtube.com/@Interschoolosf")}
-    className="text-blue-200 hover:text-[var(--color-gold)] transition-colors"
-  >
-    <Youtube className="h-5 w-5" />
-  </button>
-</div>
-
+              <button
+                onClick={() =>
+                  openLink("https://www.youtube.com/@Interschoolosf")
+                }
+                className="text-blue-200 hover:text-[var(--color-gold)] transition-colors"
+                aria-label="YouTube"
+              >
+                <Youtube className="h-5 w-5" />
+              </button>
+            </div>
           </div>
 
           {/* Quick Links */}

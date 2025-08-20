@@ -352,37 +352,21 @@ export default function OlympiadPage() {
               Knowledge, Logical Reasoning & Essay Writing
             </p>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto text-center">
-              <div className="space-y-1">
-                <div className="text-xl md:text-2xl font-bold text-[var(--color-gold)]">
-                  50
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto text-center">
+              {[
+                { value: "50", label: "Questions" },
+                { value: "2", label: "Hours" },
+                { value: "₹299", label: "Per Subject" },
+              ].map((item, idx) => (
+                <div key={idx} className="flex flex-col items-center space-y-2">
+                  <div className="text-2xl md:text-3xl font-extrabold text-[var(--color-gold)]">
+                    {item.value}
+                  </div>
+                  <div className="text-sm md:text-base text-blue-200 font-medium">
+                    {item.label}
+                  </div>
                 </div>
-                <div className="text-xs md:text-sm text-blue-200">
-                  Questions
-                </div>
-              </div>
-              <div className="space-y-1">
-                <div className="text-xl md:text-2xl font-bold text-[var(--color-gold)]">
-                  2
-                </div>
-                <div className="text-xs md:text-sm text-blue-200">Hours</div>
-              </div>
-              <div className="space-y-1">
-                <div className="text-xl md:text-2xl font-bold text-[var(--color-gold)]">
-                  0
-                </div>
-                <div className="text-xs md:text-sm text-blue-200">
-                  Negative Marks
-                </div>
-              </div>
-              <div className="space-y-1">
-                <div className="text-xl md:text-2xl font-bold text-[var(--color-gold)]">
-                  ₹299
-                </div>
-                <div className="text-xs md:text-sm text-blue-200">
-                  Per Subject
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -838,7 +822,10 @@ export default function OlympiadPage() {
                       </li>
                       <li className="flex items-start space-x-2">
                         <CheckCircle className="h-3 w-3 md:h-4 md:w-4 text-green-600 mt-0.5" />
-                        <span>No negative marking for incorrect answers</span>
+                        <span>
+                          No negative marking for prelims Bt 1/4 th negative
+                          marking for mains that is -0.5
+                        </span>
                       </li>
                       <li className="flex items-start space-x-2">
                         <CheckCircle className="h-3 w-3 md:h-4 md:w-4 text-green-600 mt-0.5" />
@@ -858,7 +845,7 @@ export default function OlympiadPage() {
                     <ul className="space-y-2 md:space-y-3 text-xs md:text-sm">
                       <li className="flex items-start space-x-2">
                         <Award className="h-3 w-3 md:h-4 md:w-4 text-[var(--color-gold)] mt-0.5" />
-                        <span>Minimum 50% score required for finals</span>
+                        <span>Minimum 70% score required for Mains</span>
                       </li>
                       <li className="flex items-start space-x-2">
                         <Award className="h-3 w-3 md:h-4 md:w-4 text-[var(--color-gold)] mt-0.5" />
@@ -889,16 +876,7 @@ export default function OlympiadPage() {
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 text-xs md:text-sm">
                     <div>
-                      <strong>Registration Deadline:</strong> October 20, 2024
-                    </div>
-                    <div>
-                      <strong>Admit Card Release:</strong> November 1, 2024
-                    </div>
-                    <div>
-                      <strong>Examination Dates:</strong> November 15-16, 2024
-                    </div>
-                    <div>
-                      <strong>Results Declaration:</strong> November 30, 2024
+                      <strong>Registration Deadline:</strong> October 10, 2025
                     </div>
                   </div>
                 </div>
@@ -937,17 +915,6 @@ export default function OlympiadPage() {
             >
               <Link href="/events">View All Events</Link>
             </Button>
-          </div>
-
-          <div className="mt-6 md:mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 text-xs md:text-sm text-blue-200">
-            <div className="flex items-center gap-2">
-              <Users className="h-3 w-3 md:h-4 md:w-4" />
-              <span>10,000+ students participating</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle className="h-3 w-3 md:h-4 md:w-4" />
-              <span>No negative marking</span>
-            </div>
           </div>
         </div>
       </section>

@@ -203,7 +203,7 @@ export default function BooksPage() {
   const [selectedGrade, setSelectedGrade] = useState("all")
   const [cart, setCart] = useState<string[]>([])
 
-  const categories = ["all", "GK", "Maths", "Science"]
+  const categories = ["all", "GK", "Maths", "Science", " Logical Reasoning"];
   const grades = ["all", "5th-6th Grade", "7th-8th Grade", "9th-10th Grade"]
 
   useEffect(() => {

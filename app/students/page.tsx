@@ -20,11 +20,13 @@ export default function StudentsPage() {
             </Badge>
 
             <h1 className="font-serif text-4xl md:text-6xl font-bold leading-tight">
-              Register as a <span className="text-[var(--color-gold)]">Student</span>
+              Register as a{" "}
+              <span className="text-[var(--color-gold)]">Student</span>
             </h1>
 
             <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-              Compete in Academic & Sports Events • Win Scholarships • Earn Recognition
+              Compete in Academic & Sports Events • Win Scholarships • Earn
+              Recognition
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -56,7 +58,8 @@ export default function StudentsPage() {
               Competition Categories
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Students are automatically categorized based on their grade for fair competition
+              Students are automatically categorized based on their grade for
+              fair competition
             </p>
           </div>
 
@@ -66,8 +69,12 @@ export default function StudentsPage() {
                 <CardTitle className="text-center">Category 1</CardTitle>
               </CardHeader>
               <CardContent className="p-6 text-center space-y-4">
-                <div className="text-3xl font-bold text-green-600">5th - 6th</div>
-                <p className="text-muted-foreground">Grade levels for junior category competitions</p>
+                <div className="text-3xl font-bold text-green-600">
+                  5th - 6th
+                </div>
+                <p className="text-muted-foreground">
+                  Grade levels for junior category competitions
+                </p>
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center justify-center space-x-2">
                     <CheckCircle className="h-4 w-4 text-green-600" />
@@ -86,8 +93,12 @@ export default function StudentsPage() {
                 <CardTitle className="text-center">Category 2</CardTitle>
               </CardHeader>
               <CardContent className="p-6 text-center space-y-4">
-                <div className="text-3xl font-bold text-[var(--color-gold)]">7th - 8th</div>
-                <p className="text-muted-foreground">Grade levels for intermediate category competitions</p>
+                <div className="text-3xl font-bold text-[var(--color-gold)]">
+                  7th - 8th
+                </div>
+                <p className="text-muted-foreground">
+                  Grade levels for intermediate category competitions
+                </p>
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center justify-center space-x-2">
                     <CheckCircle className="h-4 w-4 text-[var(--color-gold)]" />
@@ -106,8 +117,12 @@ export default function StudentsPage() {
                 <CardTitle className="text-center">Category 3</CardTitle>
               </CardHeader>
               <CardContent className="p-6 text-center space-y-4">
-                <div className="text-3xl font-bold text-[var(--color-royal-blue)]">9th - 10th</div>
-                <p className="text-muted-foreground">Grade levels for senior category competitions</p>
+                <div className="text-3xl font-bold text-[var(--color-royal-blue)]">
+                  9th - 10th
+                </div>
+                <p className="text-muted-foreground">
+                  Grade levels for senior category competitions
+                </p>
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center justify-center space-x-2">
                     <CheckCircle className="h-4 w-4 text-[var(--color-royal-blue)]" />
@@ -169,8 +184,14 @@ export default function StudentsPage() {
                   </div>
                 </div>
                 <div className="bg-blue-50 p-3 rounded-lg text-sm">
-                  <p className="font-semibold text-[var(--color-royal-blue)]">Format:</p>
-                  <p>50 questions each • 1 mark per question • No negative marking • 2-hour duration</p>
+                  <p className="font-semibold text-[var(--color-royal-blue)]">
+                    Format:
+                  </p>
+                  <p>
+                    50 questions each • 1 mark per question • No negative
+                    marking for prelims Bt 1/4 th negative marking for mains
+                    that is -0.5 , advance have 1 • 2-hour duration
+                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -227,7 +248,9 @@ export default function StudentsPage() {
                   </div>
                 </div>
                 <div className="bg-yellow-50 p-3 rounded-lg text-sm">
-                  <p className="font-semibold text-[var(--color-gold)]">Age Groups:</p>
+                  <p className="font-semibold text-[var(--color-gold)]">
+                    Age Groups:
+                  </p>
                   <p>U-12, U-14, U-16 categories for fair competition</p>
                 </div>
               </CardContent>
@@ -244,7 +267,8 @@ export default function StudentsPage() {
               Registration Fees
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Affordable registration fees with automatic calculation based on your event selections
+              Affordable registration fees with automatic calculation based on
+              your event selections
             </p>
           </div>
 
@@ -292,7 +316,9 @@ export default function StudentsPage() {
               </CardHeader>
               <CardContent className="p-6 space-y-4">
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-[var(--color-gold)]">₹293-295</div>
+                  <div className="text-4xl font-bold text-[var(--color-gold)]">
+                    ₹293-295
+                  </div>
                   <p className="text-muted-foreground">per student</p>
                 </div>
                 <div className="space-y-2 text-sm">
@@ -320,7 +346,8 @@ export default function StudentsPage() {
 
           <div className="text-center mt-8">
             <p className="text-muted-foreground">
-              <strong>Note:</strong> Registration fees are automatically calculated based on your event selections
+              <strong>Note:</strong> Registration fees are automatically
+              calculated based on your event selections
             </p>
           </div>
         </div>
@@ -342,7 +369,9 @@ export default function StudentsPage() {
                   <GraduationCap className="h-6 w-6 text-[var(--color-gold)]" />
                 </div>
                 <h3 className="font-semibold">Scholarships</h3>
-                <p className="text-sm text-muted-foreground">Win merit-based scholarships for higher education</p>
+                <p className="text-sm text-muted-foreground">
+                  Win merit-based scholarships for higher education
+                </p>
               </CardContent>
             </Card>
 
@@ -352,7 +381,9 @@ export default function StudentsPage() {
                   <Trophy className="h-6 w-6 text-[var(--color-royal-blue)]" />
                 </div>
                 <h3 className="font-semibold">Trophies</h3>
-                <p className="text-sm text-muted-foreground">Earn prestigious trophies and medals</p>
+                <p className="text-sm text-muted-foreground">
+                  Earn prestigious trophies and medals
+                </p>
               </CardContent>
             </Card>
 
@@ -362,7 +393,9 @@ export default function StudentsPage() {
                   <Award className="h-6 w-6 text-green-600" />
                 </div>
                 <h3 className="font-semibold">Recognition</h3>
-                <p className="text-sm text-muted-foreground">Build strong profile for college admissions</p>
+                <p className="text-sm text-muted-foreground">
+                  Build strong profile for college admissions
+                </p>
               </CardContent>
             </Card>
 
@@ -372,7 +405,9 @@ export default function StudentsPage() {
                   <Target className="h-6 w-6 text-purple-600" />
                 </div>
                 <h3 className="font-semibold">Skills</h3>
-                <p className="text-sm text-muted-foreground">Enhance academic and competitive abilities</p>
+                <p className="text-sm text-muted-foreground">
+                  Enhance academic and competitive abilities
+                </p>
               </CardContent>
             </Card>
           </div>
@@ -382,10 +417,12 @@ export default function StudentsPage() {
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-br from-[var(--color-royal-blue)] via-blue-700 to-blue-900 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">Ready to Compete?</h2>
+          <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">
+            Ready to Compete?
+          </h2>
           <p className="text-blue-200 text-lg mb-8 max-w-2xl mx-auto">
-            Join thousands of students in the most prestigious inter-school competition. Register now and showcase your
-            talents!
+            Join thousands of students in the most prestigious inter-school
+            competition. Register now and showcase your talents!
           </p>
 
           <Button
@@ -403,7 +440,10 @@ export default function StudentsPage() {
             </div>
             <div className="flex items-center gap-2">
               <Star className="h-4 w-4" />
-              <span>No negative marking</span>
+              <span>
+                No negative marking for prelims Bt 1/4 th negative marking for
+                mains that is -0.5
+              </span>
             </div>
           </div>
         </div>
@@ -411,5 +451,5 @@ export default function StudentsPage() {
 
       <Footer />
     </div>
-  )
+  );
 }

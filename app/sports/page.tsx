@@ -48,31 +48,31 @@ const sportsCategories: SportsCategory[] = [
     events: [
       {
         id: "cricket",
-        name: "Cricket (T-19)",
+        name: "Cricket (T-20)",
         description:
           "19-over cricket tournament with modified rules for school competition",
         teamSize: "11 players + 4 substitutes",
         duration: "2 days",
         fee: 295,
         rules: [
-          "19 overs per innings",
+          "20 overs per innings",
           "Maximum 4 overs per bowler",
-          "Powerplay: First 5 overs",
+          "Powerplay: First 6 overs",
           "No-ball and wide ball penalties apply",
           "DRS not available",
         ],
         equipment: "Cricket kit, helmet, pads, gloves provided by school",
-        venue: "Cricket Ground A & B",
+        venue: ""
       },
       {
         id: "football",
         name: "Football",
         description: "Standard 11-a-side football tournament",
-        teamSize: "11 players + 7 substitutes",
+        teamSize: "11 players + 4 substitutes",
         duration: "2 days",
         fee: 295,
         rules: [
-          "Two halves of 35 minutes each",
+          "Two halves of 20 minutes each",
           "Standard FIFA rules apply",
           "Maximum 3 substitutions per team",
           "Yellow and red card system",
@@ -82,15 +82,15 @@ const sportsCategories: SportsCategory[] = [
         venue: "Football Field A & B",
       },
       {
-        id: "kandali",
-        name: "Kandali",
+        id: "kabaddi",
+        name: "Kabaddi",
         description: "Traditional Indian team sport similar to Kabaddi",
-        teamSize: "7 players + 5 substitutes",
+        teamSize: "7 players + 2 substitutes",
         duration: "1 day",
         fee: 293,
         rules: [
-          "Two halves of 20 minutes each",
-          "Traditional Kandali rules",
+          "Two halves of 10 minutes each",
+          "Traditional kabaddi rules",
           "No equipment required",
           "Points for successful raids and tackles",
           "Team with highest points wins",
@@ -99,14 +99,14 @@ const sportsCategories: SportsCategory[] = [
         venue: "Indoor Sports Hall",
       },
       {
-        id: "kiakho",
-        name: "Kia-kho",
+        id: "kho-kho",
+        name: "Kho-kho",
         description: "Traditional chasing game requiring speed and agility",
         teamSize: "9 players + 3 substitutes",
         duration: "1 day",
         fee: 293,
         rules: [
-          "Two innings of 9 minutes each",
+          "Two innings of 10 minutes each",
           "Traditional Kho-Kho rules",
           "Chasing and defending turns",
           "Points for successful touches",
@@ -117,13 +117,13 @@ const sportsCategories: SportsCategory[] = [
       },
       {
         id: "relay",
-        name: "150m Relay Race",
+        name: "400m Relay Race",
         description: "Team relay race with 4 runners per team",
         teamSize: "4 runners + 2 substitutes",
         duration: "Half day",
         fee: 294,
         rules: [
-          "4 x 37.5m relay format",
+          "4 x 100m relay format",
           "Baton passing in designated zones",
           "Lane discipline must be maintained",
           "False start rules apply",
@@ -144,7 +144,7 @@ const sportsCategories: SportsCategory[] = [
         name: "Track Events",
         description:
           "Individual running competitions across multiple distances",
-        events: ["100m Sprint", "200m Sprint", "400m Sprint", "1km Distance"],
+        events: ["100m Sprint", "200m Sprint", "400m Sprint", "1.6km Distance"],
         duration: "1 day",
         fee: 299,
         rules: [
@@ -161,7 +161,7 @@ const sportsCategories: SportsCategory[] = [
         id: "field-events",
         name: "Field Events",
         description: "Throwing and jumping competitions",
-        events: ["High Jump", "Discus Throw", "Shot Put"],
+        events: ["High Jump", "Discus Throw", "Shot Put","Long Jump"],
         duration: "1 day",
         fee: 299,
         rules: [
@@ -216,19 +216,21 @@ const ageCategories = [
   {
     category: "U-12",
     description: "Under 12 years",
-    eligibility: "Born after November 15, 2012",
+    eligibility: "Born after 1st January 2013",
     badge: "bg-green-500 text-white",
   },
   {
     category: "U-14",
     description: "Under 14 years",
-    eligibility: "Born after November 15, 2010",
+    eligibility:
+      "Born on or after 1st January 2011 and on or before 31st December 2012",
     badge: "bg-[var(--color-gold)] text-black",
   },
   {
     category: "U-16",
     description: "Under 16 years",
-    eligibility: "Born after November 15, 2008",
+    eligibility:
+      "Born on or after 1st January 2009 and on or before 31st December 2010",
     badge: "bg-[var(--color-royal-blue)] text-white",
   },
 ];

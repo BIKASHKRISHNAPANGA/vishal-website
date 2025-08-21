@@ -86,19 +86,19 @@ export interface StudentFormData {
 }
 
 const academicEvents = [
-  { id: "maths", name: "Mathematics", fee: 299 },
-  { id: "science", name: "Science", fee: 299 },
-  { id: "gk", name: "General Knowledge", fee: 299 },
-  { id: "reasoning", name: "Logical Reasoning", fee: 299 },
-  { id: "essay", name: "Essay Writing", fee: 299 },
+  { id: "maths", name: "Mathematics", fee: 349 },
+  { id: "science", name: "Science", fee: 349 },
+  { id: "gk", name: "General Knowledge", fee: 349 },
+  { id: "reasoning", name: "Logical Reasoning", fee: 349 },
+  { id: "essay", name: "Essay Writing", fee: 349 },
 ];
 
 const sportsEvents = [
-  { id: "cricket", name: "Cricket (T-19)", fee: 295, type: "team" },
-  { id: "football", name: "Football", fee: 295, type: "team" },
-  { id: "kandali", name: "Kandali", fee: 293, type: "team" },
-  { id: "kiakho", name: "Kho-kho", fee: 293, type: "team" },
-  { id: "relay", name: "150m Relay Race", fee: 294, type: "team" },
+  { id: "cricket", name: "Cricket (T-20)", fee: 749, type: "team" },
+  { id: "football", name: "Football", fee: 499, type: "team" },
+  { id: "kabaddi", name: "Kabaddi", fee: 299, type: "team" },
+  { id: "kiakho", name: "Kho-kho", fee: 299, type: "team" },
+  { id: "relay", name: "150m Relay Race", fee: 299, type: "team" },
   { id: "100m", name: "100m Track", fee: 299, type: "individual" },
   { id: "200m", name: "200m Track", fee: 299, type: "individual" },
   { id: "400m", name: "400m Track", fee: 299, type: "individual" },
@@ -110,17 +110,6 @@ const sportsEvents = [
   { id: "badminton", name: "Badminton", fee: 299, type: "individual" },
 ];
 
-const schools = [
-  "Delhi Public School",
-  "St. Xavier's High School",
-  "Kendriya Vidyalaya",
-  "DAV Public School",
-  "Ryan International School",
-  "Modern School",
-  "Bal Bharati Public School",
-  "Sardar Patel Vidyalaya",
-  "Other",
-];
 
 export default function StudentRegisterPage() {
   const { toast } = useToast();
@@ -526,6 +515,30 @@ export default function StudentRegisterPage() {
       </div>
     );
   }
+
+  const books = [
+    {
+      category: "5–6",
+      title: "Science Explorer",
+      description: "Introduction to Science for classes 5–6.",
+      image: "/books/science-explorer.jpg",
+      link: "/books/science-explorer",
+    },
+    {
+      category: "7–8",
+      title: "Mathematics Mastery",
+      description: "Advanced math concepts for classes 7–8.",
+      image: "/books/mathematics-mastery.jpg",
+      link: "/books/mathematics-mastery",
+    },
+    {
+      category: "9–10",
+      title: "Physics for Young Minds",
+      description: "Fundamental physics for classes 9–10.",
+      image: "/books/physics-young-minds.jpg",
+      link: "/books/physics-young-minds",
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -1180,6 +1193,42 @@ export default function StudentRegisterPage() {
                         ))}
                       </div>
                     </div>
+
+                    {/* <Separator />
+                    <div className="py-12">
+                      <h2 className="text-2xl font-bold mb-6 text-center">
+                        Recommended Books
+                      </h2>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {books.map((book, index) => (
+                          <div
+                            key={index}
+                            className="border rounded-lg shadow-md hover:shadow-lg transition-shadow p-4"
+                          >
+                            <img
+                              src={book.image}
+                              alt={book.title}
+                              className="w-full h-40 object-cover rounded-md mb-4"
+                            />
+                            <h3 className="font-semibold text-lg">
+                              {book.title}
+                            </h3>
+                            <p className="text-sm text-gray-600 mb-2">
+                              {book.description}
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              Category: {book.category}
+                            </p>
+                            <a
+                              href={book.link}
+                              className="inline-block mt-3 text-blue-600 hover:underline"
+                            >
+                              View Book
+                            </a>
+                          </div>
+                        ))}
+                      </div>
+                    </div> */}
 
                     <Separator />
 

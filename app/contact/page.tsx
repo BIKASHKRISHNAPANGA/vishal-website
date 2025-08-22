@@ -96,7 +96,7 @@ const teamMembers = [
     img: "/team-mates/mahesh.jpg",
   },
   {
-    name: "Ms. Vishal Niranjan Kapal ",
+    name: "Mr. Vishal Niranjan Kapal ",
     role: "Founder and Director ( Sports Management)",
     email: "kapalvishal7@gmail.com",
     phone: "+91  90822 98108",
@@ -110,14 +110,14 @@ const teamMembers = [
     img: "/team-mates/shribiwas.jpg",
   },
   {
-    name: "Ms. Amit Bedprakash pandey",
+    name: "Mr. Amit Bedprakash pandey",
     role: "Head of Digital Strategy and technology",
     email: "amitvedprakashpandey@gmail.com",
     phone: "+91 91379 76758",
     img: "/team-mates/",
   },
   {
-    name: "Ms. Bikash Krishna Panga",
+    name: "Mr. Bikash Krishna Panga",
     role: "Chief Technology Officer",
     email: "pangsbikashkrishna@gmail.com",
     phone: "+91 93482 58150",

@@ -94,8 +94,10 @@ const teamMembers = [
     email: "thakurmahesh453@gmail.com",
     phone: "+91 93265 84482",
     img: "/team-mates/mahesh.jpg",
-    detail:"Mr. Mahesh Kumar Vinod Thakur, Chairman and Founder of the Interschool Olympiad and Sports Federation (IOSF), established the organization with a vision to create a powerful platform that combines academic Olympiads and sports competitions. His mission is to nurture young talent, promote holistic development, and inspire students to achieve excellence both in knowledge and athletics. Under his leadership, IOSF is committed to building confidence, discipline, and teamwork among students, while providing them opportunities to shine at interschool and inter-state levels.",
-   Message :"I believe every child has the power to excel when given the right platform. Through IOSF, our aim is to inspire students to achieve excellence in both academics and sports, fostering confidence, discipline, and leadership for a brighter future.",
+    detail:
+      "Mr. Mahesh Kumar Vinod Thakur, Chairman and Founder of the Interschool Olympiad and Sports Federation (IOSF), established the organization with a vision to create a powerful platform that combines academic Olympiads and sports competitions. His mission is to nurture young talent, promote holistic development, and inspire students to achieve excellence both in knowledge and athletics. Under his leadership, IOSF is committed to building confidence, discipline, and teamwork among students, while providing them opportunities to shine at interschool and inter-state levels.",
+    Message:
+      "I believe every child has the power to excel when given the right platform. Through IOSF, our aim is to inspire students to achieve excellence in both academics and sports, fostering confidence, discipline, and leadership for a brighter future.",
   },
   {
     name: "Mr. Vishal Niranjan Kapal ",
@@ -103,8 +105,10 @@ const teamMembers = [
     email: "kapalvishal7@gmail.com",
     phone: "+91  90822 98108",
     img: "/team-mates/vishal.jpg",
-    detail:"Mr. Vishal Kapal, Vice Chairman and Founder of the Interschool Olympiad and Sports Federation (IOSF), plays a key role in driving the organization’s vision of blending academic Olympiads with sports competitions. With his strong leadership and expertise in sports management, he is dedicated to promoting discipline, teamwork, and holistic development among students. Mr. Kapal is passionate about building a culture where young learners can showcase their knowledge, skills, and sporting talent on inter-school and inter-state platforms, helping them grow into confident and capable individuals",
-    Message :"At IOSF, we strive to give every student the opportunity to shine — not just in academics, but also in sports. Our goal is to create a platform that nurtures talent, builds confidence, and inspires young minds to aim higher with passion and discipline."
+    detail:
+      "Mr. Vishal Kapal, Vice Chairman and Founder of the Interschool Olympiad and Sports Federation (IOSF), plays a key role in driving the organization’s vision of blending academic Olympiads with sports competitions. With his strong leadership and expertise in sports management, he is dedicated to promoting discipline, teamwork, and holistic development among students. Mr. Kapal is passionate about building a culture where young learners can showcase their knowledge, skills, and sporting talent on inter-school and inter-state platforms, helping them grow into confident and capable individuals",
+    Message:
+      "At IOSF, we strive to give every student the opportunity to shine — not just in academics, but also in sports. Our goal is to create a platform that nurtures talent, builds confidence, and inspires young minds to aim higher with passion and discipline.",
   },
   {
     name: "Mr. Shriniwas Ramkumar Gupta",
@@ -112,7 +116,8 @@ const teamMembers = [
     email: "Guptashree469@gmail.com",
     phone: "+91 91525 37011",
     img: "/team-mates/shribiwas.jpg",
-    detail:"good persion"
+    detail:
+      "Mr. Shriniwas Ramkumar Gupta, Head of Research and Development (R&D) at the Interschool Olympiad and Sports Federation (IOSF), plays a crucial role in driving innovation and academic excellence within the organization. With expertise in educational research, curriculum development, and program innovation, he ensures that IOSF remains at the forefront of delivering high-quality, impactful initiatives for students and schools. His forward-thinking strategies contribute to the continuous improvement of the federation’s offerings and the development of future-ready programs.",
   },
   {
     name: "Mr. Amit Bedprakash pandey",
@@ -120,7 +125,8 @@ const teamMembers = [
     email: "amitvedprakashpandey@gmail.com",
     phone: "+91 91379 76758",
     img: "/team-mates/",
-    detail:"Mr. Amit Bedprakash Pandey, Head of Digital Marketing and Web Developer at the Interschool Olympiad and Sports Federation (IOSF), plays a vital role in strengthening the organization’s digital presence and outreach. With expertise in web development and online marketing strategies, he ensures IOSF connects effectively with students, schools, and partners. His innovative approach helps in building a strong brand identity and expanding the federation’s reach through modern digital platforms."
+    detail:
+      "Mr. Amit Bedprakash Pandey, Head of Digital Marketing and Web Developer at the Interschool Olympiad and Sports Federation (IOSF), plays a vital role in strengthening the organization’s digital presence and outreach. With expertise in web development and online marketing strategies, he ensures IOSF connects effectively with students, schools, and partners. His innovative approach helps in building a strong brand identity and expanding the federation’s reach through modern digital platforms.",
   },
   {
     name: "Mr. Bikash Krishna Panga",
@@ -128,7 +134,8 @@ const teamMembers = [
     email: "pangsbikashkrishna@gmail.com",
     phone: "+91 93482 58150",
     img: "/team-mates/bikash.jpg",
-    detail:"Mr. Bikash Krishna Panga, Chief Technology Officer (CTO) and Web Developer of the Interschool Olympiad and Sports Federation (IOSF), is the driving force behind the organization’s digital growth and innovation. With his expertise in technology and web solutions, he ensures a seamless and engaging online experience for students, schools, and stakeholders. His commitment to integrating technology with education and sports helps IOSF reach a wider audience and build a strong digital presence."
+    detail:
+      "Mr. Bikash Krishna Panga, Chief Technology Officer (CTO) and Web Developer of the Interschool Olympiad and Sports Federation (IOSF), is the driving force behind the organization’s digital growth and innovation. With his expertise in technology and web solutions, he ensures a seamless and engaging online experience for students, schools, and stakeholders. His commitment to integrating technology with education and sports helps IOSF reach a wider audience and build a strong digital presence.",
   },
 ];
 

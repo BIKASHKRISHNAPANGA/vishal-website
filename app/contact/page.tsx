@@ -117,7 +117,7 @@ const teamMembers = [
     phone: "+91 91525 37011",
     img: "/team-mates/shribiwas.jpg",
     detail:
-      "Mr. Shriniwas Ramkumar Gupta, Head of Research and Development (R&D) at the Interschool Olympiad and Sports Federation (IOSF), plays a crucial role in driving innovation and academic excellence within the organization. With expertise in educational research, curriculum development, and program innovation, he ensures that IOSF remains at the forefront of delivering high-quality, impactful initiatives for students and schools. His forward-thinking strategies contribute to the continuous improvement of the federation’s offerings and the development of future-ready programs.",
+      "Mr. Srinivas Ram Kumar Gupta serves as the Head of Finance and Administration at the Interschool Olympiad & Sports Federation. With his expertise in financial planning, management, and organizational administration, he ensures smooth operations and effective resource management for the federation. His leadership plays a key role in maintaining transparency, efficiency, and accountability, contributing to the overall growth and success of the organization.",
   },
   {
     name: "Mr. Amit Bedprakash pandey",

@@ -455,7 +455,7 @@ export default function ContactPage() {
       {/* Team Section */}
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
-          {/* Section Header */}
+          {/* Header */}
           <div className="text-center mb-12">
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-[var(--color-royal-blue)] mb-4">
               Meet Our Team
@@ -466,12 +466,13 @@ export default function ContactPage() {
             </p>
           </div>
 
-          {/* Team Grid */}
+          {/* Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {teamMembers.map((member, index) => (
               <Card
                 key={index}
-                className="border-0 shadow-xl rounded-2xl overflow-hidden hover:shadow-2xl transition-shadow duration-300"
+                className="border-0 shadow-xl rounded-2xl overflow-hidden hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
+                onClick={() => setSelectedMember(member)}
               >
                 <CardContent className="p-0">
                   {/* Profile Image */}
@@ -486,6 +487,7 @@ export default function ContactPage() {
                         <a
                           href={`mailto:${member.email}`}
                           className="bg-white text-[var(--color-royal-blue)] text-xs font-medium px-3 py-1 rounded-full shadow-md"
+                          onClick={(e) => e.stopPropagation()}
                         >
                           Contact
                         </a>
@@ -518,10 +520,10 @@ export default function ContactPage() {
             ))}
           </div>
 
-          {/* Modal for More Details */}
+          {/* Modal */}
           {selectedMember && (
             <div
-              className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4 md:p-6"
+              className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4"
               onClick={() => setSelectedMember(null)}
             >
               <div
@@ -549,14 +551,12 @@ export default function ContactPage() {
                     {selectedMember.role}
                   </p>
 
-                  {/* Message */}
                   {selectedMember.Message && (
                     <div className="bg-[var(--color-royal-blue)] text-white p-4 rounded-xl w-full mb-4">
                       <p className="text-sm">{selectedMember.Message}</p>
                     </div>
                   )}
 
-                  {/* Detailed Info */}
                   <p className="text-sm md:text-base text-gray-700 mb-4 leading-relaxed">
                     {selectedMember.detail}
                   </p>

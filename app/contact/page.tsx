@@ -447,22 +447,24 @@ export default function ContactPage() {
 
       {/* Team Section */}
       <section className="py-16 bg-muted/30">
-        <div>
+        <div className="container mx-auto px-4">
+          {/* Section Header */}
           <div className="text-center mb-12">
-            <h2 className="font-serif text-3xl font-bold text-[var(--color-royal-blue)] mb-4">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-[var(--color-royal-blue)] mb-4">
               Meet Our Team
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
               Our dedicated team is here to ensure your competition experience
-              is smooth and successful
+              is smooth and successful.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+          {/* Team Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {teamMembers.map((member, index) => (
               <Card
                 key={index}
-                className="border-0 shadow-xl rounded-2xl overflow-hidden hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
-                onClick={() => setSelectedMember(member)}
+                className="border-0 shadow-xl rounded-2xl overflow-hidden hover:shadow-2xl transition-shadow duration-300"
               >
                 <CardContent className="p-0">
                   {/* Profile Image */}
@@ -477,7 +479,6 @@ export default function ContactPage() {
                         <a
                           href={`mailto:${member.email}`}
                           className="bg-white text-[var(--color-royal-blue)] text-xs font-medium px-3 py-1 rounded-full shadow-md"
-                          onClick={(e) => e.stopPropagation()}
                         >
                           Contact
                         </a>
@@ -513,11 +514,11 @@ export default function ContactPage() {
           {/* Modal for More Details */}
           {selectedMember && (
             <div
-              className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+              className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4 md:p-6"
               onClick={() => setSelectedMember(null)}
             >
               <div
-                className="bg-white rounded-2xl shadow-2xl w-[90%] max-w-lg p-6 relative text-gray-800"
+                className="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 relative text-gray-800 max-h-[90vh] overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
               >
                 <button
@@ -531,17 +532,17 @@ export default function ContactPage() {
                   <img
                     src={selectedMember.img}
                     alt={selectedMember.name}
-                    className="w-28 h-28 aspect-square object-cover rounded-full border-4 border-[var(--color-royal-blue)] shadow-lg mb-4"
+                    className="w-24 h-24 md:w-28 md:h-28 aspect-square object-cover rounded-full border-4 border-[var(--color-royal-blue)] shadow-lg mb-4"
                   />
 
-                  <h2 className="text-xl font-bold text-[var(--color-royal-blue)]">
+                  <h2 className="text-lg md:text-xl font-bold text-[var(--color-royal-blue)]">
                     {selectedMember.name}
                   </h2>
                   <p className="text-sm text-gray-500 mb-4">
                     {selectedMember.role}
                   </p>
 
-                  {/* Message (if exists) */}
+                  {/* Message */}
                   {selectedMember.Message && (
                     <div className="bg-[var(--color-royal-blue)] text-white p-4 rounded-xl w-full mb-4">
                       <p className="text-sm">{selectedMember.Message}</p>
@@ -549,11 +550,11 @@ export default function ContactPage() {
                   )}
 
                   {/* Detailed Info */}
-                  <p className="text-sm text-gray-700 mb-4">
+                  <p className="text-sm md:text-base text-gray-700 mb-4 leading-relaxed">
                     {selectedMember.detail}
                   </p>
 
-                  <div className="text-sm text-gray-600 space-y-2">
+                  <div className="text-sm text-gray-600 space-y-1">
                     <p>
                       <strong>Email:</strong> {selectedMember.email}
                     </p>

@@ -20,7 +20,7 @@ import {
   CheckCircle,
   Users,
   Calendar,
-  Award,
+  Award,X
 } from "lucide-react"
 
 const contactInfo = [
@@ -94,13 +94,17 @@ const teamMembers = [
     email: "thakurmahesh453@gmail.com",
     phone: "+91 93265 84482",
     img: "/team-mates/mahesh.jpg",
+    detail:"Mr. Mahesh Kumar Vinod Thakur, Chairman and Founder of the Interschool Olympiad and Sports Federation (IOSF), established the organization with a vision to create a powerful platform that combines academic Olympiads and sports competitions. His mission is to nurture young talent, promote holistic development, and inspire students to achieve excellence both in knowledge and athletics. Under his leadership, IOSF is committed to building confidence, discipline, and teamwork among students, while providing them opportunities to shine at interschool and inter-state levels.",
+   Message :"I believe every child has the power to excel when given the right platform. Through IOSF, our aim is to inspire students to achieve excellence in both academics and sports, fostering confidence, discipline, and leadership for a brighter future.",
   },
   {
     name: "Mr. Vishal Niranjan Kapal ",
-    role: "Founder and Director ( Sports Management)",
+    role: "Vice Chairman and Founder",
     email: "kapalvishal7@gmail.com",
     phone: "+91  90822 98108",
     img: "/team-mates/vishal.jpg",
+    detail:"Mr. Vishal Kapal, Vice Chairman and Founder of the Interschool Olympiad and Sports Federation (IOSF), plays a key role in driving the organization’s vision of blending academic Olympiads with sports competitions. With his strong leadership and expertise in sports management, he is dedicated to promoting discipline, teamwork, and holistic development among students. Mr. Kapal is passionate about building a culture where young learners can showcase their knowledge, skills, and sporting talent on inter-school and inter-state platforms, helping them grow into confident and capable individuals",
+    Message :"At IOSF, we strive to give every student the opportunity to shine — not just in academics, but also in sports. Our goal is to create a platform that nurtures talent, builds confidence, and inspires young minds to aim higher with passion and discipline."
   },
   {
     name: "Mr. Shriniwas Ramkumar Gupta",
@@ -108,6 +112,7 @@ const teamMembers = [
     email: "Guptashree469@gmail.com",
     phone: "+91 91525 37011",
     img: "/team-mates/shribiwas.jpg",
+    detail:"good persion"
   },
   {
     name: "Mr. Amit Bedprakash pandey",
@@ -115,6 +120,7 @@ const teamMembers = [
     email: "amitvedprakashpandey@gmail.com",
     phone: "+91 91379 76758",
     img: "/team-mates/",
+    detail:"Mr. Amit Bedprakash Pandey, Head of Digital Marketing and Web Developer at the Interschool Olympiad and Sports Federation (IOSF), plays a vital role in strengthening the organization’s digital presence and outreach. With expertise in web development and online marketing strategies, he ensures IOSF connects effectively with students, schools, and partners. His innovative approach helps in building a strong brand identity and expanding the federation’s reach through modern digital platforms."
   },
   {
     name: "Mr. Bikash Krishna Panga",
@@ -122,6 +128,7 @@ const teamMembers = [
     email: "pangsbikashkrishna@gmail.com",
     phone: "+91 93482 58150",
     img: "/team-mates/bikash.jpg",
+    detail:"Mr. Bikash Krishna Panga, Chief Technology Officer (CTO) and Web Developer of the Interschool Olympiad and Sports Federation (IOSF), is the driving force behind the organization’s digital growth and innovation. With his expertise in technology and web solutions, he ensures a seamless and engaging online experience for students, schools, and stakeholders. His commitment to integrating technology with education and sports helps IOSF reach a wider audience and build a strong digital presence."
   },
 ];
 
@@ -160,7 +167,7 @@ export default function ContactPage() {
       userType: "student",
     })
   }
-
+ const [selectedMember, setSelectedMember] = useState<any>(null);
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -440,7 +447,7 @@ export default function ContactPage() {
 
       {/* Team Section */}
       <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
+        <div>
           <div className="text-center mb-12">
             <h2 className="font-serif text-3xl font-bold text-[var(--color-royal-blue)] mb-4">
               Meet Our Team
@@ -450,59 +457,114 @@ export default function ContactPage() {
               is smooth and successful
             </p>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-auto-fit gap-8"
-     style={{ gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))" }}>
-  {teamMembers.map((member, index) => (
-    <Card
-      key={index}
-      className="border-0 shadow-xl rounded-2xl overflow-hidden hover:shadow-2xl transition-shadow duration-300"
-    >
-      <CardContent className="p-0">
-        {/* Profile Image */}
-        <div className="relative flex justify-center pt-5">
-          <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg">
-            <img
-              src={member.img}
-              alt={member.name}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-black/20 hover:bg-black/40 transition duration-300 flex items-center justify-center opacity-0 hover:opacity-100 rounded-full">
-              <a
-                href={`mailto:${member.email}`}
-                className="bg-white text-[var(--color-royal-blue)] text-xs font-medium px-3 py-1 rounded-full shadow-md"
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {teamMembers.map((member, index) => (
+              <Card
+                key={index}
+                className="border-0 shadow-xl rounded-2xl overflow-hidden hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
+                onClick={() => setSelectedMember(member)}
               >
-                Contact
-              </a>
-            </div>
+                <CardContent className="p-0">
+                  {/* Profile Image */}
+                  <div className="relative flex justify-center pt-5">
+                    <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg">
+                      <img
+                        src={member.img}
+                        alt={member.name}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/20 hover:bg-black/40 transition duration-300 flex items-center justify-center opacity-0 hover:opacity-100 rounded-full">
+                        <a
+                          href={`mailto:${member.email}`}
+                          className="bg-white text-[var(--color-royal-blue)] text-xs font-medium px-3 py-1 rounded-full shadow-md"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          Contact
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Member Info */}
+                  <div className="p-5 text-center">
+                    <h3 className="font-bold text-lg text-gray-900 mb-1">
+                      {member.name}
+                    </h3>
+                    <p className="text-[var(--color-royal-blue)] font-medium text-sm mb-3">
+                      {member.role}
+                    </p>
+
+                    <div className="space-y-2 text-sm text-gray-600">
+                      <div className="flex items-center justify-center space-x-2">
+                        <Mail className="h-4 w-4 text-[var(--color-royal-blue)]" />
+                        <span>{member.email}</span>
+                      </div>
+                      <div className="flex items-center justify-center space-x-2">
+                        <Phone className="h-4 w-4 text-[var(--color-royal-blue)]" />
+                        <span>{member.phone}</span>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
-        </div>
 
-        {/* Member Info */}
-        <div className="p-5 text-center">
-          <h3 className="font-bold text-lg text-gray-900 mb-1">
-            {member.name}
-          </h3>
-          <p className="text-[var(--color-royal-blue)] font-medium text-sm mb-3">
-            {member.role}
-          </p>
+          {/* Modal for More Details */}
+          {selectedMember && (
+            <div
+              className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+              onClick={() => setSelectedMember(null)}
+            >
+              <div
+                className="bg-white rounded-2xl shadow-2xl w-[90%] max-w-lg p-6 relative text-gray-800"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
+                  onClick={() => setSelectedMember(null)}
+                >
+                  <X className="h-6 w-6" />
+                </button>
 
-          <div className="space-y-2 text-sm text-gray-600">
-            <div className="flex items-center justify-center space-x-2">
-              <Mail className="h-4 w-4 text-[var(--color-royal-blue)]" />
-              <span>{member.email}</span>
+                <div className="flex flex-col items-center text-center">
+                  <img
+                    src={selectedMember.img}
+                    alt={selectedMember.name}
+                    className="w-28 h-28 aspect-square object-cover rounded-full border-4 border-[var(--color-royal-blue)] shadow-lg mb-4"
+                  />
+
+                  <h2 className="text-xl font-bold text-[var(--color-royal-blue)]">
+                    {selectedMember.name}
+                  </h2>
+                  <p className="text-sm text-gray-500 mb-4">
+                    {selectedMember.role}
+                  </p>
+
+                  {/* Message (if exists) */}
+                  {selectedMember.Message && (
+                    <div className="bg-[var(--color-royal-blue)] text-white p-4 rounded-xl w-full mb-4">
+                      <p className="text-sm">{selectedMember.Message}</p>
+                    </div>
+                  )}
+
+                  {/* Detailed Info */}
+                  <p className="text-sm text-gray-700 mb-4">
+                    {selectedMember.detail}
+                  </p>
+
+                  <div className="text-sm text-gray-600 space-y-2">
+                    <p>
+                      <strong>Email:</strong> {selectedMember.email}
+                    </p>
+                    <p>
+                      <strong>Phone:</strong> {selectedMember.phone}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center justify-center space-x-2">
-              <Phone className="h-4 w-4 text-[var(--color-royal-blue)]" />
-              <span>{member.phone}</span>
-            </div>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  ))}
-</div>
-
+          )}
         </div>
       </section>
 

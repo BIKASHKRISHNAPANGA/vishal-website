@@ -94,20 +94,141 @@ const academicEvents = [
 ];
 
 const sportsEvents = [
-  { id: "cricket", name: "Cricket (T-20)", fee: 749, type: "team" },
-  { id: "football", name: "Football", fee: 499, type: "team" },
-  { id: "kabaddi", name: "Kabaddi", fee: 299, type: "team" },
-  { id: "kiakho", name: "Kho-kho", fee: 299, type: "team" },
-  { id: "relay", name: "150m Relay Race", fee: 299, type: "team" },
-  { id: "100m", name: "100m Track", fee: 299, type: "individual" },
-  { id: "200m", name: "200m Track", fee: 299, type: "individual" },
-  { id: "400m", name: "400m Track", fee: 299, type: "individual" },
-  { id: "1km", name: "1km Track", fee: 299, type: "individual" },
-  { id: "highjump", name: "High Jump", fee: 299, type: "individual" },
-  { id: "discus", name: "Discus Throw", fee: 299, type: "individual" },
-  { id: "shotput", name: "Shot Put", fee: 299, type: "individual" },
-  { id: "chess", name: "Chess", fee: 299, type: "individual" },
-  { id: "badminton", name: "Badminton", fee: 299, type: "individual" },
+  // Team events
+  {
+    id: "cricket",
+    name: "Cricket (T-20)",
+    fee: 749,
+    type: "team",
+    gender: "male",
+    categories: ["Under-12", "Under-14", "Under-16"],
+  },
+  {
+    id: "football",
+    name: "Football",
+    fee: 499,
+    type: "team",
+    gender: "male",
+    categories: ["Under-12", "Under-14", "Under-16"],
+  },
+  {
+    id: "kabaddi",
+    name: "Kabaddi",
+    fee: 299,
+    type: "team",
+    gender: "male",
+    categories: ["Under-12", "Under-14", "Under-16"],
+  },
+  {
+    id: "kiakho",
+    name: "Kho-kho",
+    fee: 299,
+    type: "team",
+    gender: "female",
+    categories: ["Under-12", "Under-14", "Under-16"],
+  },
+  {
+    id: "relay",
+    name: "400m Relay Race",
+    fee: 299,
+    type: "team",
+    gender: "both",
+    categories: ["Under-12", "Under-14", "Under-16"],
+  },
+
+  // Track events
+  {
+    id: "100m",
+    name: "100m Track",
+    fee: 299,
+    type: "individual",
+    gender: "both",
+    categories: ["Under-12", "Under-14", "Under-16"],
+  },
+  {
+    id: "200m",
+    name: "200m Track",
+    fee: 299,
+    type: "individual",
+    gender: "both",
+    categories: ["Under-12", "Under-14", "Under-16"],
+  },
+  {
+    id: "400m",
+    name: "400m Track",
+    fee: 299,
+    type: "individual",
+    gender: "both",
+    categories: ["Under-12", "Under-14", "Under-16"],
+  },
+  {
+    id: "800m",
+    name: "800m Track",
+    fee: 299,
+    type: "individual",
+    gender: "female",
+    categories: ["Under-16"],
+  },
+  {
+    id: "1.6km",
+    name: "1.6km Track",
+    fee: 299,
+    type: "individual",
+    gender: "male",
+    categories: ["Under-16"],
+  },
+
+  // Field events
+  {
+    id: "longjump",
+    name: "Long Jump",
+    fee: 299,
+    type: "individual",
+    gender: "both",
+    categories: ["Under-12", "Under-14", "Under-16"],
+  },
+  {
+    id: "highjump",
+    name: "High Jump",
+    fee: 299,
+    type: "individual",
+    gender: "both",
+    categories: ["Under-14", "Under-16"],
+  },
+  {
+    id: "shotput",
+    name: "Shot Put",
+    fee: 299,
+    type: "individual",
+    gender: "both",
+    categories: ["Under-12", "Under-14", "Under-16"],
+  },
+  {
+    id: "discus",
+    name: "Discus Throw",
+    fee: 299,
+    type: "individual",
+    gender: "both",
+    categories: ["Under-12", "Under-14", "Under-16"],
+  },
+
+  // Other individual events
+  {
+    id: "chess",
+    name: "Chess",
+    fee: 299,
+    type: "individual",
+    gender: "both",
+    categories: ["Under-12", "Under-14", "Under-16"],
+  },
+  {
+    id: "badminton",
+    name: "Badminton",
+    fee: 299,
+    type: "individual",
+    gender: "both",
+    categories: ["Under-12", "Under-14", "Under-16"],
+  },
 ];
 
 
@@ -198,6 +319,37 @@ export default function StudentRegisterPage() {
 
     setTotalFee(total);
   }, [formData.academicEvents, formData.sportsEvents]);
+
+const getFilteredSportsEvents = () => {
+  if (!formData.dob) return [];
+
+  const age = calculateAge(formData.dob);
+  let ageCategory = "";
+
+  if (age <= 12) {
+    ageCategory = "Under-12";
+  } else if (age <= 14) {
+    ageCategory = "Under-14";
+  } else if (age <= 16) {
+    ageCategory = "Under-16";
+  } else {
+    return []; // Return empty if age doesn't fit any category
+  }
+
+  return sportsEvents.filter((event) => {
+    // Check if event is available for the current age category
+    if (!event.categories.includes(ageCategory)) {
+      return false;
+    }
+
+    // Check gender restrictions
+    if (event.gender !== "both" && event.gender !== formData.gender) {
+      return false;
+    }
+
+    return true;
+  });
+};
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -367,6 +519,23 @@ export default function StudentRegisterPage() {
       setIsSubmitting(false);
     }
   };
+ function calculateAge(dob: string): number {
+   const birthDate = new Date(dob);
+   const today = new Date();
+
+   let age = today.getFullYear() - birthDate.getFullYear();
+   const monthDiff = today.getMonth() - birthDate.getMonth();
+
+   // Adjust if the birthday hasn't occurred yet this year
+   if (
+     monthDiff < 0 ||
+     (monthDiff === 0 && today.getDate() < birthDate.getDate())
+   ) {
+     age--;
+   }
+
+   return age;
+ }
 
   if (showPayment) {
     return (
@@ -540,6 +709,7 @@ export default function StudentRegisterPage() {
     },
   ];
 
+ 
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -673,6 +843,19 @@ export default function StudentRegisterPage() {
                               className="focus:ring-[var(--color-royal-blue)]"
                             />
                           </div>
+                          {formData.dob && (
+                            <div className="space-y-2">
+                              <Label className="flex items-center space-x-2">
+                                <User className="h-4 w-4" />
+                                <span>
+                                  Age: {calculateAge(formData.dob)} years
+                                </span>
+                              </Label>
+                              <p className="text-xs text-muted-foreground">
+                                Sports events will be filtered based on your age
+                              </p>
+                            </div>
+                          )}
                         </div>
 
                         <div className="space-y-2">
@@ -1239,7 +1422,7 @@ export default function StudentRegisterPage() {
                         <span>Sports Tournaments</span>
                       </h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {sportsEvents.map((event) => (
+                        {getFilteredSportsEvents().map((event) => (
                           <div
                             key={event.id}
                             className="flex items-center space-x-3 p-3 border rounded-lg"

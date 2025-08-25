@@ -356,7 +356,7 @@ export default function OlympiadPage() {
               {[
                 { value: "50", label: "Questions" },
                 { value: "2", label: "Hours" },
-                { value: "₹299", label: "Per Subject" },
+                { value: "₹349", label: "Per Subject" },
               ].map((item, idx) => (
                 <div key={idx} className="flex flex-col items-center space-y-2">
                   <div className="text-2xl md:text-3xl font-extrabold text-[var(--color-gold)]">

@@ -90,21 +90,21 @@ function CountdownTimer() {
 // Image Carousel Component
 function ImageCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [hovered, setHovered] = useState(false);
 
   const images = [
     {
       src: "/Moments-of-excelence/prayag.png",
-      alt: "Students celebrating academic victory",
+      alt: "Prayag is practicing with Indian cricketers Rohit Sharma, Hardik Pandya, Suryakumar Yadav, and Ishan Kishan.",
     },
     {
       src: "/Moments-of-excelence/allu.png",
-      alt: "Inter-school sports tournament",
+      alt: "Child prodigy Tapasya Pandey won the national-level essay writing competition, while Prashant is also winning countless trophies in cricket.",
     },
     {
       src: "/Moments-of-excelence/prayag2.png",
-      alt: "Award ceremony with trophies",
+      alt: "Prayag on article",
     },
-   
   ];
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % images.length);
@@ -126,15 +126,24 @@ function ImageCarousel() {
           <div
             key={index}
             className="w-full flex-shrink-0 relative h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px]"
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
           >
             <Image
               src={image.src}
               alt={image.alt}
               fill
-              className="object-contain w-full h-full bg-black" // bg-black (or any) to make borders visible
+              className="object-contain w-full h-full bg-black"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               priority={index === 0}
             />
+
+            {/* Alt text overlay */}
+            {hovered && currentSlide === index && (
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white text-sm px-3 py-1 rounded-lg max-w-[90%] text-center">
+                {image.alt}
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -169,6 +178,7 @@ function ImageCarousel() {
     </div>
   );
 }
+
 
 interface NoticeType {
   id: string;
